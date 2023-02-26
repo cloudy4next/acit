@@ -120,7 +120,7 @@ class FarmerCrudController extends CrudController
         {
             return $this->traitStore();
         }
-        dd($validator);
+        // dd($validator);
         $user_id = $this->createUser($farmer_info);
 
         $this->crud->getRequest()->request->add(['user_id'=> $user_id]);
