@@ -7,10 +7,9 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use App\Models\User;
 use App\Models\Farmer;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
-
 /**
  * Class FarmerCrudController
  * @package App\Http\Controllers\Admin
@@ -59,7 +58,7 @@ class FarmerCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(FarmerRequest::class);
+        // CRUD::setValidation(FarmerRequest::class);
         $generate_code = bin2hex(random_bytes(4));
         $generate_email = $generate_code .'@acitdream.com';
 
@@ -101,41 +100,51 @@ class FarmerCrudController extends CrudController
         $this->setupCreateOperation();
     }
 
-
-        public function store()
+    public function create()
     {
-        $check = $this->crud->setValidation(FarmerRequest::class);
+        return view('admin.farmer.create');
+    }
 
-        $farmer_info = $this->crud->getRequest()->request->all();
+        public function store(FarmerRequest $request)
+    {
+        // dd($request->profession);
 
-        $validator = Validator::make($farmer_info, [
-            'name' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
-            'profession' => 'required',
-
-        ]);
-
-        if ($validator->fails())
-        {
-            return $this->traitStore();
+        $attachments = $request->image;
+        if ($attachments != NULL) {
+            $destinationPath = public_path() . "/uploads/farmer";
+            $name = $attachments->getClientOriginalName();
+            $fileName = time() . '_' . $name;
+            $fileName = preg_replace('/\s+/', '_', $fileName);
+            $attachments->move($destinationPath, $fileName);
         }
-        // dd($validator);
-        $user_id = $this->createUser($farmer_info);
 
-        $this->crud->getRequest()->request->add(['user_id'=> $user_id]);
+        $generate_code = bin2hex(random_bytes(4));
+        $generate_email = $generate_code .'@acitdream.com';
 
-        return $this->traitStore();
+        $user_id = $this->createUser($request->name,$generate_email,$generate_code);
+
+        $farmer = new Farmer;
+        $farmer->name = $request->name;
+        $farmer->image = $fileName ?? NULL;
+        $farmer->address = $request->address;
+        $farmer->mobile = $request->mobile;
+        $farmer->login_code = $generate_code;
+        $farmer->profession = $request->profession;
+        $farmer->temp_email = $generate_email;
+        $farmer->user_id = $user_id;
+        $farmer->save();
+        // dd($farmer->id);
+        return redirect('admin/farmer')->with('success', 'Sucessfully Farmer Added!');
+
 
     }
 
-    public function createUser($farmer_info)
+    public function createUser($farmer_name,$gen_email,$gen_code) : int
     {
-
         $user = new User;
-        $user->password = Hash::make($farmer_info['login_code']);
-        $user->email = $farmer_info['temp_email'];
-        $user->name = $farmer_info['name'];
+        $user->password = Hash::make($gen_code);
+        $user->email = $gen_email;
+        $user->name = $farmer_name;
         $user->is_admin = 0;
         $user->save();
 

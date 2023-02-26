@@ -41,6 +41,8 @@ Route::group([
     // Route::post('farmer/delete/{id}', ['as' => 'admin.farmer.delete', 'uses' => 'FarmerController@deleteFarmer']);
 
     Route::crud('farmer', 'FarmerCrudController');
+    Route::post('/farmer-store', ['as' => 'admin.farmer.store', 'uses' => 'FarmerCrudController@store']);
+
     Route::crud('market-price', 'MarketPriceCrudController');
     Route::crud('stakeholder', 'StakeholderCrudController');
     Route::crud('diagnosis', 'DiagnosisCrudController');
