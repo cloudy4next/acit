@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
-use  Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Traits\HasRoles;
+use Laravel\Passport\HasApiTokens;
+
+
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens;
     use CrudTrait;
     use HasRoles;
     /**

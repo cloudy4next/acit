@@ -107,11 +107,7 @@ class FarmerCrudController extends CrudController
         $farmer_info = $this->crud->getRequest()->request->all();
         $user_id = $this->createUser($farmer_info);
 
-        if($user_id == false)
-        {
-            $this->crud->getRequest()->request->add(['user_id'=> $user_id]);
-        }
-
+        $this->crud->getRequest()->request->add(['user_id'=> $user_id]);
 
         $response = $this->traitStore();
 
@@ -120,22 +116,15 @@ class FarmerCrudController extends CrudController
 
     public function createUser($farmer_info)
     {
-        try {
 
-            $user = new User;
-            $user->password = Hash::make($farmer_info['login_code']);
-            $user->email = $farmer_info['temp_email'];
-            $user->name = $farmer_info['name'];
-            $user->is_admin = 0;
-            $user->save();
+        $user = new User;
+        $user->password = Hash::make($farmer_info['login_code']);
+        $user->email = $farmer_info['temp_email'];
+        $user->name = $farmer_info['name'];
+        $user->is_admin = 0;
+        $user->save();
 
-            return $user->id;
-
-        }
-        catch (\Throwable $e) {
-
-            return false;
-        }
+        return $user->id;
 
     }
 }
