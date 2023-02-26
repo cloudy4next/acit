@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Diagnosis extends Model
 {
-    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
 
 
     protected $hidden = [
@@ -36,6 +36,11 @@ class Diagnosis extends Model
     {
         return $this->belongsTo('App\Models\Messages');
     }
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
 
 }
 

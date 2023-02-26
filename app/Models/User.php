@@ -53,4 +53,8 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Message');
     }
 
+    public function diagnosis()
+    {
+        return $this->hasMany('App\Models\Diagnosis');
+    }
 }

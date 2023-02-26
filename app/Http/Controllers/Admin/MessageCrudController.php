@@ -5,7 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\MessageRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
-
+use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
+use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 /**
  * Class MessageCrudController
  * @package App\Http\Controllers\Admin
@@ -13,11 +17,12 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
  */
 class MessageCrudController extends CrudController
 {
-    use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+    use CreateOperation { store as traitStore; }
+    use DeleteOperation;
+    use ListOperation;
+    use ShowOperation { show as traitShow; }
+    use UpdateOperation { update as traitUpdate; }
+
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -39,7 +44,11 @@ class MessageCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        $this->crud->denyAccess(['show', 'create','edit','delete']);
+        $this->crud->denyAccess(['update', 'show', 'create', 'delete']);
+        $this->crud->removeButtons(['delete', 'update']);
+        $this->crud->enableExportButtons();
+
+        $this->crud->addButtonFromModelFunction('line', 'editMessage', 'editMessage', 'end');
 
         CRUD::column('user_id');
         CRUD::column('category_id');
@@ -47,11 +56,12 @@ class MessageCrudController extends CrudController
         // CRUD::column('read_by');
         // CRUD::column('read_at');
         CRUD::column('total_messages');
+    }
 
-        /**
-         * Columns can be defined using the fluent syntax or array syntax:
-         * - CRUD::column('price')->type('number');
-         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']);
-         */
+
+
+    public function messageData()
+    {
+        dd('0');
     }
 }

@@ -34,9 +34,9 @@ class Message extends Model
         return $this->belongsTo('App\Models\User');
     }
 
-    public function additionalDataUpdateButton($crud = false)
+        public function editMessage($crud = false)
     {
-        return '<a href="' . route('admin.page.edit', $this->id) . '" class="btn btn-sm btn-link"><i
-            class="la la-edit"></i>Edit</a>';
+        return '<a href="'.route('admin.message.edit.message', $this->id).'" class="btn btn-sm btn-link"><i class="la la-edit"></i>Edit</a>';
     }
+
 }

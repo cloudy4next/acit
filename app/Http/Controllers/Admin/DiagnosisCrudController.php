@@ -64,16 +64,23 @@ class DiagnosisCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
+
+
         CRUD::setValidation(DiagnosisRequest::class);
 
         CRUD::field('title');
-        CRUD::field('user_id');
+        // CRUD::field('user_id');
         CRUD::field('category_id');
         CRUD::field('description');
         CRUD::field('audio');
         CRUD::field('image');
         CRUD::field('video');
-
+        $this->crud->addField(
+        [
+            'name'  => 'user_id',
+            'type'  => 'hidden',
+            'value' => backpack_user()->id,
+        ]);
         /**
          * Fields can be defined using the fluent syntax or array syntax:
          * - CRUD::field('price')->type('number');

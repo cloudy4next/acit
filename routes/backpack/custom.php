@@ -28,12 +28,13 @@ Route::group([
     Route::post('post/{id}/update', ['as' => 'admin.post.update', 'uses' => 'PostCrudController@update']);
 
 
-    Route::get('farmer/{id}/edit', ['as' => 'admin.farmer.edit', 'uses' => 'farmerController@edit']);
-    Route::get('farmer/store', ['as' => 'admin.farmer.store', 'uses' => 'farmerController@store']);
-    Route::get('farmer/{id}/update', ['as' => 'admin.farmer.update', 'uses' => 'farmerController@update']);
+    // Route::get('farmer/{id}/edit', ['as' => 'admin.farmer.edit', 'uses' => 'farmerController@edit']);
+    // Route::get('farmer/store', ['as' => 'admin.farmer.store', 'uses' => 'farmerController@store']);
+    // Route::get('farmer/{id}/update', ['as' => 'admin.farmer.update', 'uses' => 'farmerController@update']);
 
 
-    // Route::get('farmer', ['as' => 'admin.farmer', 'uses' => 'FarmerController@index']);
+    Route::get('message/{id}/edit-message', ['as' => 'admin.message.edit.message', 'uses' => 'MessageCrudController@messageData']);
+
     // Route::get('farmer-search', ['as' => 'admin.farmer.search', 'uses' => 'FarmerController@search']);
     // Route::get('user-name', ['as' => 'admin.farmer.name', 'uses' => 'FarmerController@getUserName']);
     // Route::post('farmer-store', ['as' => 'admin.farmer.store', 'uses' => 'FarmerController@getUserName']);
@@ -44,4 +45,5 @@ Route::group([
     Route::crud('stakeholder', 'StakeholderCrudController');
     Route::crud('diagnosis', 'DiagnosisCrudController');
     Route::crud('message', 'MessageCrudController');
+
 }); // this should be the absolute last line of this file
