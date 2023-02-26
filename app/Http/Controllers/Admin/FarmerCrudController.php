@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Models\Farmer;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+
 /**
  * Class FarmerCrudController
  * @package App\Http\Controllers\Admin
@@ -102,16 +104,29 @@ class FarmerCrudController extends CrudController
 
         public function store()
     {
-        $this->crud->setValidation(FarmerRequest::class);
+        $check = $this->crud->setValidation(FarmerRequest::class);
 
         $farmer_info = $this->crud->getRequest()->request->all();
+
+        $validator = Validator::make($farmer_info, [
+            'name' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+            'profession' => 'required',
+
+        ]);
+
+        if ($validator->fails())
+        {
+            return $this->traitStore();
+        }
+        dd($validator);
         $user_id = $this->createUser($farmer_info);
 
         $this->crud->getRequest()->request->add(['user_id'=> $user_id]);
 
-        $response = $this->traitStore();
+        return $this->traitStore();
 
-        return $response;
     }
 
     public function createUser($farmer_info)
