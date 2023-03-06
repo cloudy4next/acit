@@ -41,7 +41,7 @@ class DiagnosisCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        $this->crud->denyAccess(['update', 'show', 'create', 'delete']);
+        // $this->crud->denyAccess(['update', 'show', 'create', 'delete']);
         $this->crud->removeButtons(['delete', 'update']);
         $this->crud->enableExportButtons();
         $this->crud->addClause('where', 'response_text','=', null);

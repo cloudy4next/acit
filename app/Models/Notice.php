@@ -21,8 +21,11 @@ class Notice extends Model
         'user_id',
     ];
 
-    public function setDatetimeAttribute($value) {
-        $this->attributes['datetime'] = \Carbon\Carbon::parse($value);
-    }
+    protected $casts = [
+         'notice_period'  => 'datetime:Y-m-d H:i:s'
+   ];
+    // public function setDatetimeAttribute($value) {
+    //     $this->attributes['datetime'] = \Carbon\Carbon::parse($value);
+    // }
 
 }
