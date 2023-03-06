@@ -33,7 +33,10 @@ Route::group([
     // Route::get('farmer/{id}/update', ['as' => 'admin.farmer.update', 'uses' => 'farmerController@update']);
 
 
-    Route::get('message/{id}/edit-message', ['as' => 'admin.message.edit.message', 'uses' => 'MessageCrudController@messageData']);
+    Route::get('diagnosis/{id}/reply-message', ['as' => 'admin.diagnosis.edit.message', 'uses' => 'DiagnosisCrudController@messageData']);
+    Route::post('diagnosis/{id}/message-update', ['as' => 'admin.diagnosis.update', 'uses' => 'DiagnosisCrudController@replyMessage']);
+
+    // Route::get('diagnosis/{id}/reply-message', ['as' => 'admin.diagnosis.edit.message', 'uses' => 'DiagnosisCrudController@messageData']);
 
     // Route::get('farmer-search', ['as' => 'admin.farmer.search', 'uses' => 'FarmerController@search']);
     // Route::get('user-name', ['as' => 'admin.farmer.name', 'uses' => 'FarmerController@getUserName']);
@@ -46,6 +49,5 @@ Route::group([
     Route::crud('market-price', 'MarketPriceCrudController');
     Route::crud('stakeholder', 'StakeholderCrudController');
     Route::crud('diagnosis', 'DiagnosisCrudController');
-    Route::crud('message', 'MessageCrudController');
 
 }); // this should be the absolute last line of this file

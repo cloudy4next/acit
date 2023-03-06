@@ -49,7 +49,7 @@ class ApiAuthController extends Controller
         if ($user) {
             if (Hash::check($request->loginCode, $user->password)) {
                 $token = $user->createToken('Laravel Password Grant Client')->accessToken;
-                $response = ['token' => $token];
+                $response = ['message'=>'success','token' => $token];
                 return response($response, 200);
             } else {
                 $response = ["message" => "Password mismatch"];
@@ -65,6 +65,7 @@ class ApiAuthController extends Controller
         $token = $request->user()->token();
         $token->revoke();
         $response = ['message' => 'You have been successfully logged out!'];
+
         return response($response, 200);
     }
 }

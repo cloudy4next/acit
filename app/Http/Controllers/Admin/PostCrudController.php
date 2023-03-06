@@ -111,7 +111,6 @@ class PostCrudController extends CrudController
             ->withcategory($category)
             ->withData($data);
     }
-
     public function update(postRequest $request, $id)
     {
         $data = post::where('id', '=', $id)->first();

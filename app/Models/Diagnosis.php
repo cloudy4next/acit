@@ -40,7 +40,10 @@ class Diagnosis extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
-
+        public function editMessage($crud = false)
+    {
+        return '<a href="'.route('admin.diagnosis.edit.message', $this->id).'" class="btn btn-sm btn-link"><i class="la la-reply"></i>Reply</a>';
+    }
 
 }
 

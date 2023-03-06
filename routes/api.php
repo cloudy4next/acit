@@ -23,12 +23,20 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['middleware' => 'cors'], function () {
 
-    Route::post('/login', ['as' => 'api.login', 'uses' => 'Api\ApiAuthController@login']);
+    Route::post('login', ['as' => 'api.login', 'uses' => 'Api\ApiAuthController@login']);
     // no need to register from api side only log in
     // Route::post('/register', ['as' => 'api.register', 'uses' => 'Api\ApiAuthController@register']);
 });
 
-Route::middleware(['middleware' => 'auth:api,'], function() {
 
-    Route::post('/logout', ['as' => 'api.logout', 'uses' => 'Api\ApiAuthController@logout']);
+Route::group(['middleware' => 'auth:api','cors'], function() {
+    Route::get('get-posts', ['as' => 'api.get.posts', 'uses' => 'Api\DiagnosisApiController@getPost']);
+    Route::get('market-info', ['as' => 'api.market.info', 'uses' => 'Api\DiagnosisApiController@getMarketInfo']);
+
+
+});
+
+
+Route::group(['middleware' => 'auth:api,'], function() {
+    Route::post('logout', ['as' => 'api.logout', 'uses' => 'Api\ApiAuthController@logout']);
 });
