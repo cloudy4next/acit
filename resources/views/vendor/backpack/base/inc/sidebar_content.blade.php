@@ -2,6 +2,9 @@
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('dashboard') }}"><i class="la la-home nav-icon"></i>
         {{ trans('backpack::base.dashboard') }}</a></li>
 
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('farmer') }}'>
+        <i class="las la-users"></i>
+        Farmers</a></li>
 
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('diagnosis') }}'><i class='nav-icon la la-reply'></i>
         Diagnoses</a></li>
@@ -33,10 +36,6 @@
                     class="nav-icon la la-id-badge"></i> <span>Roles</span></a></li>
         <li class="nav-item"><a class="nav-link" href="{{ backpack_url('permission') }}"><i
                     class="nav-icon la la-key"></i> <span>Permissions</span></a></li>
-        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('farmer') }}'>
-                <i class="las la-users"></i>
-                Farmers</a></li>
-
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('category') }}'><i
                     class="nav-icon las la-tags"></i>
                 Categories</a></li>

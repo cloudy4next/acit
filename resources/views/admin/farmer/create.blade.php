@@ -25,7 +25,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="form-group col-12 col-sm-12 col-md-9 col-lg-4 col-xl-4">
-                            <label for="Name">Farmer Name </label> <span class="text-danger">*</span>
+                            <label for="Name">Farmer Profession </label> <span class="text-danger">*</span>
                             {!! Form::text('name', null, [
                                 'class' => 'form-control name',
                                 'id' => 'name',
@@ -73,7 +73,7 @@
 
                     <div class="row">
                         <div class="form-group col-12 col-sm-12 col-md-9 col-lg-4 col-xl-4">
-                            <label for="profession">Farmer Name </label> <span class="text-danger">*</span>
+                            <label for="profession">Farmer Profession </label> <span class="text-danger">*</span>
                             {!! Form::text('profession', null, [
                                 'class' => 'form-control profession',
                                 'id' => 'profession',
