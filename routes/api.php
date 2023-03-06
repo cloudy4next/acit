@@ -29,7 +29,7 @@ Route::group(['middleware' => 'cors'], function () {
 });
 
 
-Route::group(['middleware' => 'auth:api','cors'], function() {
+Route::group(['middleware' => 'auth:api'], function() {
     Route::get('get-posts', ['as' => 'api.get.posts', 'uses' => 'Api\DiagnosisApiController@getPost']);
     Route::get('market-info', ['as' => 'api.market.info', 'uses' => 'Api\DiagnosisApiController@getMarketInfo']);
     Route::get('tutorial', ['as' => 'api.get.tutorial', 'uses' => 'Api\DiagnosisApiController@getTutorial']);
@@ -37,15 +37,16 @@ Route::group(['middleware' => 'auth:api','cors'], function() {
     Route::post('diagnosis/{id}', ['as' => 'api.get.diagnosis', 'uses' => 'Api\DiagnosisApiController@getDiagnosis']);
     Route::post('diagnosis-store', ['as' => 'api.store.diagnosis', 'uses' => 'Api\DiagnosisApiController@storeDiagnosis']);
     Route::get('category', ['as' => 'api.category', 'uses' => 'Api\DiagnosisApiController@getCategory']);
+    // Route::get('category', ['as' => 'api.category', 'uses' => 'Api\DiagnosisApiController@getCategory']);
 
 });
 
 
-Route::group(['middleware' => 'auth:api,cors'], function() {
+Route::group(['middleware' => 'auth:api'], function() {
     Route::post('logout', ['as' => 'api.logout', 'uses' => 'Api\ApiAuthController@logout']);
 });
 
 
 Route::fallback(function (){
-    abort(404, 'API Resource Not Found');
+        return response(['error' => 'API Resource Not Found'], 404);
 });
