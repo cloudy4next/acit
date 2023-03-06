@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Diagnosis;
 use Illuminate\Http\Request;
 use App\Models\Post;
@@ -14,6 +15,21 @@ use Illuminate\Support\Facades\Validator;
 
 class DiagnosisApiController extends Controller
 {
+
+
+     public function getCategory()
+    {
+
+        $data = Category::all();
+        if($data->count() == 0)
+        {
+            return response(['error' => 'No Resource Found!'], 404);
+        }
+
+        return response(['message'=>'success','count'=> $data->count(),'data'=>$data], 200);
+
+
+    }
 
      public function attachmentStore($attachments,$path) : string
     {
