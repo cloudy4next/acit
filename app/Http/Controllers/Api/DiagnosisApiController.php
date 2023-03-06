@@ -21,6 +21,7 @@ class DiagnosisApiController extends Controller
     {
 
         $data = Category::all();
+
         if($data->count() == 0)
         {
             return response(['error' => 'No Resource Found!'], 404);
