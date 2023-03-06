@@ -46,5 +46,5 @@ Route::group(['middleware' => 'auth:api,cors'], function() {
 
 
 Route::fallback(function (){
-    abort(404, 'API resource not found');
+    abort(404, 'API Resource Not Found');
 });
