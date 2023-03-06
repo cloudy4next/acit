@@ -43,3 +43,8 @@ Route::group(['middleware' => 'auth:api','cors'], function() {
 Route::group(['middleware' => 'auth:api,cors'], function() {
     Route::post('logout', ['as' => 'api.logout', 'uses' => 'Api\ApiAuthController@logout']);
 });
+
+
+Route::fallback(function (){
+    abort(404, 'API resource not found');
+});

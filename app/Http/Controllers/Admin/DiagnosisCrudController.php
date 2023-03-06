@@ -41,7 +41,7 @@ class DiagnosisCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        // $this->crud->denyAccess(['update', 'show', 'create', 'delete']);
+        $this->crud->denyAccess(['update', 'show', 'create', 'delete']);
         $this->crud->removeButtons(['delete', 'update']);
         $this->crud->enableExportButtons();
         $this->crud->addClause('where', 'response_text','=', null);
@@ -69,32 +69,32 @@ class DiagnosisCrudController extends CrudController
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
-    protected function setupCreateOperation()
-    {
+    // protected function setupCreateOperation()
+    // {
 
-        CRUD::setValidation(DiagnosisRequest::class);
+    //     CRUD::setValidation(DiagnosisRequest::class);
 
-        CRUD::field('title');
-        // CRUD::field('user_id');
-        CRUD::field('category_id');
-        CRUD::field('description');
-        CRUD::field('audio');
-        CRUD::field('image');
-        CRUD::field('video');
-        $this->crud->addField(
-        [
-            'name'  => 'user_id',
-            'type'  => 'hidden',
-            'value' => backpack_user()->id,
-        ]);
+    //     CRUD::field('title');
+    //     // CRUD::field('user_id');
+    //     CRUD::field('category_id');
+    //     CRUD::field('description');
+    //     CRUD::field('audio');
+    //     CRUD::field('image');
+    //     CRUD::field('video');
+    //     $this->crud->addField(
+    //     [
+    //         'name'  => 'user_id',
+    //         'type'  => 'hidden',
+    //         'value' => backpack_user()->id,
+    //     ]);
 
 
-        /**
-         * Fields can be defined using the fluent syntax or array syntax:
-         * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number']));
-         */
-    }
+    //     /**
+    //      * Fields can be defined using the fluent syntax or array syntax:
+    //      * - CRUD::field('price')->type('number');
+    //      * - CRUD::addField(['name' => 'price', 'type' => 'number']));
+    //      */
+    // }
 
     /**
      * Define what happens when the Update operation is loaded.
@@ -102,11 +102,11 @@ class DiagnosisCrudController extends CrudController
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */
-    protected function setupUpdateOperation()
-    {
-        $this->setupCreateOperation();
+    // protected function setupUpdateOperation()
+    // {
+    //     $this->setupCreateOperation();
 
-    }
+    // }
 
         public function messageData($id)
     {
