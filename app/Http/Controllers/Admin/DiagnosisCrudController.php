@@ -94,7 +94,7 @@ class DiagnosisCrudController extends CrudController
          * - CRUD::field('price')->type('number');
          * - CRUD::addField(['name' => 'price', 'type' => 'number']));
          */
-    // }
+    }
 
     /**
      * Define what happens when the Update operation is loaded.
