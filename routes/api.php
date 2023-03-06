@@ -36,7 +36,7 @@ Route::group(['middleware' => 'auth:api','cors'], function() {
     Route::get('notice', ['as' => 'api.get.notice', 'uses' => 'Api\DiagnosisApiController@getNotice']);
     Route::post('diagnosis/{id}', ['as' => 'api.get.diagnosis', 'uses' => 'Api\DiagnosisApiController@getDiagnosis']);
     Route::post('diagnosis-store', ['as' => 'api.store.diagnosis', 'uses' => 'Api\DiagnosisApiController@storeDiagnosis']);
-    Route::post('category', ['as' => 'api.category', 'uses' => 'Api\DiagnosisApiController@getCategory']);
+    Route::get('category', ['as' => 'api.category', 'uses' => 'Api\DiagnosisApiController@getCategory']);
 
 });
 
