@@ -25,7 +25,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="form-group col-12 col-sm-12 col-md-9 col-lg-4 col-xl-4">
-                            <label for="Name">Farmer Profession </label> <span class="text-danger">*</span>
+                            <label for="Name">Farmer Name </label> <span class="text-danger">*</span>
                             {!! Form::text('name', null, [
                                 'class' => 'form-control name',
                                 'id' => 'name',
@@ -58,7 +58,7 @@
                             <label for="address">Address </label> <span class="text-danger">*</span>
                             {!! Form::text('address', null, [
                                 'class' => 'form-control address',
-                                'id' => 'addressaddress',
+                                'id' => 'address',
                                 'tabindex' => 1,
                                 'required' => 'required',
                                 'data-error' => 'address field is require',

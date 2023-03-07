@@ -7,7 +7,7 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use App\Models\User;
 use App\Models\Farmer;
-use GuzzleHttp\Psr7\Request;
+// use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 /**
@@ -56,49 +56,49 @@ class FarmerCrudController extends CrudController
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
-    protected function setupCreateOperation()
-    {
-        // CRUD::setValidation(FarmerRequest::class);
-        $generate_code = bin2hex(random_bytes(4));
-        $generate_email = $generate_code .'@acitdream.com';
+    // protected function setupCreateOperation()
+    // {
+    //     // CRUD::setValidation(FarmerRequest::class);
+    //     $generate_code = bin2hex(random_bytes(4));
+    //     $generate_email = $generate_code .'@acitdream.com';
 
-        CRUD::field('name');
-        CRUD::field('address');
-        CRUD::field('mobile');
-        CRUD::field('profession');
+    //     CRUD::field('name');
+    //     CRUD::field('address');
+    //     CRUD::field('mobile');
+    //     CRUD::field('profession');
 
-        $this->crud->addField(
-        [
-            'name'  => 'temp_email',
-            'type'  => 'hidden',
-            'value' => $generate_email,
-        ]);
+    //     $this->crud->addField(
+    //     [
+    //         'name'  => 'temp_email',
+    //         'type'  => 'hidden',
+    //         'value' => $generate_email,
+    //     ]);
 
-        $this->crud->addField(
-        [
-            'name'  => 'user_id',
-            'type'  => 'hidden',
-        ]);
+    //     $this->crud->addField(
+    //     [
+    //         'name'  => 'user_id',
+    //         'type'  => 'hidden',
+    //     ]);
 
-        $this->crud->addField(
-        [
-            'name'  => 'login_code',
-            'type'  => 'hidden',
-            'value' => $generate_code,
-        ]);
+    //     $this->crud->addField(
+    //     [
+    //         'name'  => 'login_code',
+    //         'type'  => 'hidden',
+    //         'value' => $generate_code,
+    //     ]);
 
-    }
+    // }
 
-    /**
-     * Define what happens when the Update operation is loaded.
-     *
-     * @see https://backpackforlaravel.com/docs/crud-operation-update
-     * @return void
-     */
-    protected function setupUpdateOperation()
-    {
-        $this->setupCreateOperation();
-    }
+    // /**
+    //  * Define what happens when the Update operation is loaded.
+    //  *
+    //  * @see https://backpackforlaravel.com/docs/crud-operation-update
+    //  * @return void
+    //  */
+    // protected function setupUpdateOperation()
+    // {
+    //     $this->setupCreateOperation();
+    // }
 
     public function create()
     {
