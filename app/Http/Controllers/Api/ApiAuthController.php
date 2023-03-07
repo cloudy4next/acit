@@ -39,7 +39,7 @@ class ApiAuthController extends Controller
         ]);
         if ($validator->fails())
         {
-            return response(['errors'=>$validator->errors()->all()], 422);
+            return response(['message'=>$validator->errors()->all()], 422);
         }
         //---------convert code to mail too validate each email and password ------------//
 

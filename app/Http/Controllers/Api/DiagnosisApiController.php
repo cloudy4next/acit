@@ -30,7 +30,7 @@ class DiagnosisApiController extends Controller
         $user_data[] = [
             'id' => $data->id,
             'name' => $data->name,
-            'image' => $data->farmer->image,
+            'image' => url('uploads/farmer/'.$data->farmer->image),
             'phone' => $data->farmer->phone,
             'address' => $data->farmer->address,
             'profession' =>  $data->farmer->profession,
