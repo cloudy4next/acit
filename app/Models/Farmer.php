@@ -28,4 +28,9 @@ class Farmer extends Model
     protected $hidden = [
         'id',
     ];
+
+        public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 }

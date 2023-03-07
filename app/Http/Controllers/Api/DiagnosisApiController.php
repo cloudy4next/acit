@@ -12,10 +12,36 @@ use App\Models\Notice;
 use App\Models\Tutorial;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 class DiagnosisApiController extends Controller
 {
 
+
+    public function userInfo(Request $request)
+    {
+        $data = User::with('farmer')->where('id',Auth::user()->id)->first();
+        $user_data = [];
+        if($data->count() == 0)
+        {
+            return response(['error' => 'No Resource Found!'], 404);
+        }
+
+        $user_data[] = [
+            'id' => $data->id,
+            'name' => $data->name,
+            'image' => $data->farmer->image,
+            'phone' => $data->farmer->phone,
+            'address' => $data->farmer->address,
+            'profession' =>  $data->farmer->profession,
+
+        ];
+
+
+        return response(['message'=>'success','data'=>$user_data], 200);
+
+
+    }
 
      public function getCategory()
     {
@@ -187,7 +213,7 @@ class DiagnosisApiController extends Controller
 
         foreach($data as $tutorial_data)
         {
-            $tutorial[] = $this->marketResponse($tutorial_data);
+            $tutorial[] = $this->tutorialResponse($tutorial_data);
 
         }
         return response(['message'=>'success','count'=> $data->count(),'data'=>$tutorial], 200);

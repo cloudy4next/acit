@@ -16,9 +16,9 @@ use App\Http\Controllers\Controller\Api;
 |
 */
 
-Route::middleware('auth:api,cors')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api,cors')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 
 Route::group(['middleware' => 'cors'], function () {
@@ -37,8 +37,7 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::post('diagnosis/{id}', ['as' => 'api.get.diagnosis', 'uses' => 'Api\DiagnosisApiController@getDiagnosis']);
     Route::post('diagnosis-store', ['as' => 'api.store.diagnosis', 'uses' => 'Api\DiagnosisApiController@storeDiagnosis']);
     Route::get('category', ['as' => 'api.category', 'uses' => 'Api\DiagnosisApiController@getCategory']);
-    // Route::get('category', ['as' => 'api.category', 'uses' => 'Api\DiagnosisApiController@getCategory']);
-
+    Route::get('user', ['as' => 'api.user.info', 'uses' => 'Api\DiagnosisApiController@userInfo']);
 });
 
 

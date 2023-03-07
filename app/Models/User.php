@@ -60,4 +60,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Diagnosis');
     }
+
+    public function farmer()
+    {
+        return $this->hasOne('App\Models\Farmer');
+    }
 }
