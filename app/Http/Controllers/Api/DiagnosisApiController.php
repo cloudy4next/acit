@@ -14,6 +14,8 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+
+
 class DiagnosisApiController extends Controller
 {
 
@@ -31,7 +33,7 @@ class DiagnosisApiController extends Controller
             'id' => $data->id,
             'name' => $data->name,
             'image' => url('uploads/farmer/'.$data->farmer->image),
-            'phone' => $data->farmer->phone,
+            'mobile' => $data->farmer->mobile,
             'address' => $data->farmer->address,
             'profession' =>  $data->farmer->profession,
 
@@ -77,7 +79,6 @@ class DiagnosisApiController extends Controller
             'description' => 'required|string|min:6|',
             'audio' => 'required|mimes:mp3,wav',
             'image' => 'required|max:2048|mimes:jpeg,png,jpg,gif',
-
 
         ]);
 
