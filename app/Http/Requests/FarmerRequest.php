@@ -30,7 +30,8 @@ class FarmerRequest extends FormRequest
             'address' => 'required|min:5|max:255',
             'mobile' => 'required|min:5|max:255',
             'profession' => 'required|min:5|max:255',
-            'image' => 'required|image|size:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+
         ];
     }
 
@@ -55,7 +56,7 @@ class FarmerRequest extends FormRequest
     {
     return [
       'image.required' => "You must use the 'Choose file' button to select which file you wish to upload",
-      'image.size' => "Maximum file size to image is 2MB (2048 KB)",
+      'image.max' => "Maximum file size to image is 2MB (2048 KB)",
     ];
     }
 }

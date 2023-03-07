@@ -43,6 +43,9 @@ class FarmerCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+
+        $this->crud->enableExportButtons();
+        $this->crud->denyAccess(['update','show']);
         CRUD::column('name');
         CRUD::column('mobile');
         CRUD::column('login_code');
@@ -151,4 +154,12 @@ class FarmerCrudController extends CrudController
         return $user->id;
 
     }
+
+    // public function destroy($id)
+    // {
+    //     $Id = Farmer::where('id',$id)->delete();
+    //     dd($Id->user_id);
+    //     DB::table('users')->delete($Id);
+    //     DB::table('farmers')->delete($id);
+    // }
 }
