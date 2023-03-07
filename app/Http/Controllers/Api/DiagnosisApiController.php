@@ -75,8 +75,9 @@ class DiagnosisApiController extends Controller
             'title' => 'required|string|min:6',
             'category_id' => 'required|integer|min:6|',
             'description' => 'required|string|min:6|',
-            'image' => 'required|mimes:jpeg,png,jpg,gif',
             'audio' => 'required|mimes:mp3,wav',
+            'image' => 'required|max:2048|mimes:jpeg,png,jpg,gif',
+
 
         ]);
 
