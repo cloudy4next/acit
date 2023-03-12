@@ -27,6 +27,7 @@ class Tutorial extends Model
 
     ];
 
+
     public function category()
     {
 

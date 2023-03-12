@@ -206,6 +206,7 @@ class DiagnosisApiController extends Controller
         $data = Tutorial::all();
         $tutorial = [];
 
+
         if($data->count() == 0)
         {
             return response(['error' => 'No Resource Found!'], 404);
@@ -237,17 +238,21 @@ class DiagnosisApiController extends Controller
             return  [
                     'title' => $post->title,
                     'category' => $post->category,
-                    'image' => $post->image,
+                    'image' => url('uploads/post/'.$post->image),
                     'description' => json_encode($post->description),
+                    'created_at' => $post->created_at,
             ];
     }
 
     public function tutorialResponse($tutorial) : array
     {
+        preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user|shorts)\/))([^\?&\"'>]+)/", $tutorial->url, $matches);
+
             return  [
                     'title' => $tutorial->title,
                     'category' => $tutorial->category,
-                    'url' => $tutorial->url,
+                    'url' => $matches,
+                    'created_at' => $tutorial->created_at,
             ];
     }
 
@@ -258,6 +263,8 @@ class DiagnosisApiController extends Controller
                     'title' => $notice_data->title,
                     'description' => $notice_data->description,
                     'notice_period' => $notice_data->notice_period,
+                    'created_at' => $notice_data->created_at,
+
             ];
     }
 
