@@ -141,6 +141,8 @@ class DiagnosisApiController extends Controller
 
     public function getPost($id)
     {
+        // dd($id);
+
         $data = Post::where('category_id',$id)->get();
         $post = [];
 
@@ -200,11 +202,12 @@ class DiagnosisApiController extends Controller
 
     }
 
-    public function getTutorial()
+    public function getTutorial($id)
     {
+
+        // dd($id);
         $data = Tutorial::where('category_id',$id)->get();
         $tutorial = [];
-
 
         if($data->count() == 0)
         {
@@ -236,7 +239,7 @@ class DiagnosisApiController extends Controller
     {
             return  [
                     'title' => $post->title,
-                    'category' => $post->category,
+                    // 'category' => $post->category,
                     'image' => url('uploads/post/'.$post->image),
                     'description' => json_encode($post->description),
                     'created_at' => $post->created_at,
@@ -249,8 +252,8 @@ class DiagnosisApiController extends Controller
 
             return  [
                     'title' => $tutorial->title,
-                    'category' => $tutorial->category,
-                    'url' => $matches,
+                    // 'category' => $tutorial->category,
+                    'url' => $matches[1],
                     'created_at' => $tutorial->created_at,
             ];
     }
