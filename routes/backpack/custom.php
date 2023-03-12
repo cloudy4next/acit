@@ -26,7 +26,7 @@ Route::group([
         Route::post('post/{id}/update', ['as' => 'admin.post.update', 'uses' => 'PostCrudController@update']);
     });
 
-    Route::group(['middleware' => 'acl:Super admin'], function () {
+    Route::group(['middleware' => 'acl:Settings'], function () {
         Route::crud('category', 'CategoryCrudController');
 
     });
@@ -35,13 +35,13 @@ Route::group([
 
     });
         Route::group(['middleware' => 'acl:Notice'], function () {
-                Route::crud('notice', 'NoticeCrudController');
+            Route::crud('notice', 'NoticeCrudController');
 
     });
         Route::group(['middleware' => 'acl:Diagnosis'], function () {
-
-        Route::get('diagnosis/{id}/reply-message', ['as' => 'admin.diagnosis.edit.message', 'uses' => 'DiagnosisCrudController@messageData']);
-        Route::post('diagnosis/{id}/message-update', ['as' => 'admin.diagnosis.update', 'uses' => 'DiagnosisCrudController@replyMessage']);
+            Route::crud('diagnosis', 'DiagnosisCrudController');
+            Route::get('diagnosis/{id}/reply-message', ['as' => 'admin.diagnosis.edit.message', 'uses' => 'DiagnosisCrudController@messageData']);
+            Route::post('diagnosis/{id}/message-update', ['as' => 'admin.diagnosis.update', 'uses' => 'DiagnosisCrudController@replyMessage']);
 
     });
         Route::group(['middleware' => 'acl:Farmer'], function () {

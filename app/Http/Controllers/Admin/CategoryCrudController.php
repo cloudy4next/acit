@@ -39,6 +39,7 @@ class CategoryCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+        $this->crud->denyAccess(['update','store','show','delete']);
         // CRUD::column('id');
         CRUD::column('name');
         CRUD::column('created_at');

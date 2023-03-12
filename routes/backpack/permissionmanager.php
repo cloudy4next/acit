@@ -9,11 +9,12 @@
 | handled by the Backpack\PermissionManager package.
 |
 */
+use Illuminate\Support\Facades\Route;
 
 Route::group([
     'namespace'  => 'Backpack\PermissionManager\app\Http\Controllers',
     'prefix'     => config('backpack.base.route_prefix', 'admin'),
-    'middleware' => ['web', backpack_middleware()],
+    'middleware' => ['web', backpack_middleware(),'acl:Settings'],
 ], function () {
     Route::crud('permission', 'PermissionCrudController');
     Route::crud('role', 'RoleCrudController');
