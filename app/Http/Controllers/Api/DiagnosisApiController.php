@@ -139,11 +139,10 @@ class DiagnosisApiController extends Controller
 
   // Being lazy, i implemented all function's on this Controller !!!
 
-    public function getPost()
+    public function getPost($id)
     {
-        $data = Post::all();
+        $data = Post::where('category_id',$id)->get();
         $post = [];
-
 
         foreach($data as $post_data)
         {
@@ -203,7 +202,7 @@ class DiagnosisApiController extends Controller
 
     public function getTutorial()
     {
-        $data = Tutorial::all();
+        $data = Tutorial::where('category_id',$id)->get();
         $tutorial = [];
 
 

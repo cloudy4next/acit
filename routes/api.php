@@ -30,9 +30,9 @@ Route::group(['middleware' => 'cors'], function () {
 
 
 Route::group(['middleware' => 'auth:api'], function() {
-    Route::get('get-posts', ['as' => 'api.get.posts', 'uses' => 'Api\DiagnosisApiController@getPost']);
+    Route::post('get-posts/{id}', ['as' => 'api.get.posts', 'uses' => 'Api\DiagnosisApiController@getPost']);
     Route::get('market-info', ['as' => 'api.market.info', 'uses' => 'Api\DiagnosisApiController@getMarketInfo']);
-    Route::get('tutorial', ['as' => 'api.get.tutorial', 'uses' => 'Api\DiagnosisApiController@getTutorial']);
+    Route::post('tutorial/{id}', ['as' => 'api.get.tutorial', 'uses' => 'Api\DiagnosisApiController@getTutorial']);
     Route::get('notice', ['as' => 'api.get.notice', 'uses' => 'Api\DiagnosisApiController@getNotice']);
     Route::post('diagnosis/{id}', ['as' => 'api.get.diagnosis', 'uses' => 'Api\DiagnosisApiController@getDiagnosis']);
     Route::post('diagnosis-store', ['as' => 'api.store.diagnosis', 'uses' => 'Api\DiagnosisApiController@storeDiagnosis']);
