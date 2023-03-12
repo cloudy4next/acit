@@ -42,6 +42,22 @@ class PostCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+        $this->crud->denyAccess(['update', 'show', 'create', 'delete']);
+
+        if(backpack_user()->hasPermissionTo('Post delete'))
+        {
+            $this->crud->allowAccess(['delete']);
+        }
+
+        if(backpack_user()->hasPermissionTo('Post store'))
+        {
+            $this->crud->allowAccess('create');
+        }
+
+        if(backpack_user()->hasPermissionTo('Post edit'))
+        {
+            $this->crud->allowAccess('update');
+        }
 
         $this->crud->addColumn([
             'name' => 'row_number',

@@ -65,6 +65,24 @@ class NoticeCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
+
+        $this->crud->denyAccess(['update', 'show', 'create', 'delete']);
+
+        if(backpack_user()->hasPermissionTo('Notice delete'))
+        {
+            $this->crud->allowAccess(['delete']);
+        }
+
+        if(backpack_user()->hasPermissionTo('Notice store'))
+        {
+            $this->crud->allowAccess('create');
+        }
+
+        if(backpack_user()->hasPermissionTo('Notice edit'))
+        {
+            $this->crud->allowAccess('update');
+        }
+
         $ten_minutes = now()->addMinutes(10);
 
         CRUD::setValidation(NoticeRequest::class);

@@ -21,7 +21,7 @@ class StakeholderCrudController extends CrudController
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     * 
+     *
      * @return void
      */
     public function setup()
@@ -33,25 +33,42 @@ class StakeholderCrudController extends CrudController
 
     /**
      * Define what happens when the List operation is loaded.
-     * 
+     *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
     protected function setupListOperation()
     {
+
+         $this->crud->denyAccess(['update', 'show', 'create', 'delete']);
+
+        if(backpack_user()->hasPermissionTo('StakeHolder delete'))
+        {
+            $this->crud->allowAccess(['delete']);
+        }
+
+        if(backpack_user()->hasPermissionTo('StakeHolder store'))
+        {
+            $this->crud->allowAccess('create');
+        }
+
+        if(backpack_user()->hasPermissionTo('StakeHolder edit'))
+        {
+            $this->crud->allowAccess('update');
+        }
         CRUD::column('user_id');
         CRUD::column('category_id');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');
-         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
+         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']);
          */
     }
 
     /**
      * Define what happens when the Create operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
@@ -65,13 +82,13 @@ class StakeholderCrudController extends CrudController
         /**
          * Fields can be defined using the fluent syntax or array syntax:
          * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
+         * - CRUD::addField(['name' => 'price', 'type' => 'number']));
          */
     }
 
     /**
      * Define what happens when the Update operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */

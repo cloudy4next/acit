@@ -39,6 +39,22 @@ class TutorialCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+                $this->crud->denyAccess(['update', 'show', 'create', 'delete']);
+
+        if(backpack_user()->hasPermissionTo('Tutorial delete'))
+        {
+            $this->crud->allowAccess(['delete']);
+        }
+
+        if(backpack_user()->hasPermissionTo('Tutorial store'))
+        {
+            $this->crud->allowAccess('create');
+        }
+
+        if(backpack_user()->hasPermissionTo('Tutorial edit'))
+        {
+            $this->crud->allowAccess('update');
+        }
 
         $this->crud->addColumn([
             'name' => 'row_number',

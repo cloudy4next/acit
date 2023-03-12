@@ -43,6 +43,17 @@ class FarmerCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+        $this->crud->denyAccess(['update', 'show', 'create', 'delete']);
+
+        if(backpack_user()->hasPermissionTo('Farmer delete'))
+        {
+            $this->crud->allowAccess(['delete']);
+        }
+
+        if(backpack_user()->hasPermissionTo('Farmer add'))
+        {
+            $this->crud->allowAccess('create');
+        }
 
         $this->crud->enableExportButtons();
         $this->crud->denyAccess(['update','show']);
