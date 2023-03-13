@@ -53,9 +53,9 @@
             <div class="text-center"><a href="{{ route('backpack.auth.password.reset') }}">Forgot Password</a>
             </div>
         @endif
-        {{-- @if (config('backpack.base.registration_open'))
+        @if (config('backpack.base.registration_open'))
             <div class="text-center"><a
                     href="{{ route('backpack.auth.register') }}">{{ trans('backpack::base.register') }}</a></div>
-        @endif --}}
+        @endif
     </div>
 @endsection
