@@ -18,6 +18,7 @@ Route::group([
 ], function () { // custom admin routes
 
 
+    Route::get('dashboard', ['as' => 'dashboard', 'uses' => 'DashboardController@dashboard']);
 
     Route::group(['middleware' => 'acl:Post'], function () {
         Route::crud('post', 'PostCrudController');
