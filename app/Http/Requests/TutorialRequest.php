@@ -26,7 +26,8 @@ class TutorialRequest extends FormRequest
     {
         return [
             'title' => 'required|min:5|max:255',
-            'url' => 'required|min:5|max:255'
+            'url' => 'required|min:5|max:255',
+            'description' => 'required|min:5',
 
         ];
     }
