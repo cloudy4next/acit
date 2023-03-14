@@ -94,6 +94,8 @@ class TutorialCrudController extends CrudController
         CRUD::field('category_id');
         CRUD::field('title');
         CRUD::field('url');
+        CRUD::field('description');
+
         $this->crud->addField(
         [
             'name'  => 'user_id',
