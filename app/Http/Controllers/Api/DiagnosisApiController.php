@@ -252,7 +252,7 @@ class DiagnosisApiController extends Controller
 
             return  [
                     'title' => $tutorial->title,
-                    // 'category' => $tutorial->category,
+                    'description' => $tutorial->description,
                     'url' => $matches[1],
                     'created_at' => $tutorial->created_at,
             ];
