@@ -61,3 +61,38 @@
         @endif
     </div>
 @endsection
+
+@push('styles')
+    <style>
+        div {
+            margin: 10px;
+        }
+
+        .first {
+            width: 25%;
+            display: inline-block;
+            background-color: green;
+        }
+
+        .second {
+            width: 25%;
+            display: inline-block;
+            background-color: blue;
+        }
+
+        .third {
+            width: 25%;
+            display: inline-block;
+            background-color: yellow;
+        }
+
+        @media screen and (max-width: 500px) {
+
+            .first,
+            .second,
+            .third {
+                width: 70%;
+            }
+        }
+    </style>
+@endpush

@@ -3,23 +3,13 @@
 
 <head>
     @include(backpack_view('inc.head'))
-    {{-- style="background-image: url('https://i.ibb.co/kD2HLJn/login-bg.jpg')" --}}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         body {
             background-image: url('https://i.ibb.co/kD2HLJn/login-bg.jpg');
             background-size: cover;
             background-position: left;
             font-family: Arial, sans-serif;
-        }
-
-        .heading-with-image {
-            background-image: url('https://i.ibb.co/vqr2r1D/Applogo.png');
-            background-repeat: no-repeat;
-            background-position: left center;
-            padding-left: 50px;
-            /* adjust this value to control the spacing between the image and text */
-            line-height: 1.5;
-            /* adjust this value to vertically center the text */
         }
     </style>
 
