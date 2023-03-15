@@ -3,15 +3,7 @@
 
 <head>
     @include(backpack_view('inc.head'))
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body {
-            background-image: url('https://i.ibb.co/kD2HLJn/login-bg.jpg');
-            background-size: cover;
-            background-position: left;
-            font-family: Arial, sans-serif;
-        }
-    </style>
+
 
 </head>
 

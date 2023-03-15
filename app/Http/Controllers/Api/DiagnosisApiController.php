@@ -77,8 +77,8 @@ class DiagnosisApiController extends Controller
             'title' => 'required|string|min:6',
             'category_id' => 'required|integer',
             'description' => 'required|string|min:6|',
-            'audio' => 'required|mimes:mp3,wav',
-            'image' => 'required|image',
+            'audio' => 'mimes:mp3,wav',
+            'image' => 'image',
         ]);
 
         if($validation->fails()){

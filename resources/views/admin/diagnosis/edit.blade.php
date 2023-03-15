@@ -52,10 +52,16 @@
                                 }
                             @endphp
                             {{-- {{ $diagnosis->image }} --}}
-                            <div> <a href="{{ URL::to('/uploads/diagnosis/' . $diagnosis->image) }}" download>
-                                    {{ $diagnosis->image }} </a>
+
+                            <div class="form-group col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <img id="preview-image-before-upload"
+                                    src="{{ url('/uploads/diagnosis/image/' . $diagnosis->image) }}" alt="preview image"
+                                    style="max-height: 120px; border: 5px solid #555">
                             </div>
+                            <a href="{{ URL::to('/uploads/diagnosis/image/' . $diagnosis->image) }}" download>
+                                Download </a>
                         </div>
+
                     </div>
                     <div class="row">
                         <div class="form-group col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -102,6 +108,7 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+
             CKEDITOR.replace('description', {
                 height: 200
             });

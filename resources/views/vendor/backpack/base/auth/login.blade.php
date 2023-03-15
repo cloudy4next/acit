@@ -63,7 +63,7 @@
 @endsection
 
 @push('styles')
-    <style>
+    {{-- <style>
         div {
             margin: 10px;
         }
@@ -94,5 +94,5 @@
                 width: 70%;
             }
         }
-    </style>
+    </style> --}}
 @endpush

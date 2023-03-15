@@ -85,9 +85,16 @@
                                 }
                             @endphp
                             {{-- {{ $data->image }} --}}
-                            <div> <a href="{{ URL::to('/uploads/post/' . $data->image) }}" download>
+                            {{-- <div> <a href="{{ URL::to('/uploads/post/' . $data->image) }}" download>
                                     {{ $data->image }} </a>
+                            </div> --}}
+
+                            <div class="form-group col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <img id="preview-image-before-upload" src="{{ url('/uploads/post/' . $data->image) }}"
+                                    alt="preview image" style="height: 120px; border: 5px solid #555">
                             </div>
+                            <a href="{{ URL::to('/uploads/post/' . $data->image) }}" download>
+                                Download </a>
                         </div>
                     </div>
                     <div class="row">
