@@ -25,7 +25,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="form-group col-12 col-sm-12 col-md-9 col-lg-9 col-xl-9">
-                            <label for="tile"> Title </label> <span class="text-danger">*</span>
+                            <label for="tile"> Title </label> <span class="text-danger"></span>
                             {!! Form::text('title', $diagnosis->title, [
                                 'class' => 'form-control title',
                                 'id' => 'job-title',
@@ -38,6 +38,16 @@
                             @if ($errors->has('title'))
                                 <span class="text-danger"><strong>{{ $errors->first('title') }}</strong></span>
                             @endif
+                        </div>
+
+                        <div class="form-group col-12 col-sm-12 col-md-9 col-lg-9 col-xl-9">
+                            <label for="tile"> Description </label> <span class="text-danger"></span>
+                            {!! Form::textarea('description', $diagnosis->description, [
+                                'class' => 'form-control description',
+                                'tabindex' => 4,
+                                'rows' => 4,
+                                'readonly',
+                            ]) !!}
                         </div>
                     </div>
 
@@ -52,14 +62,31 @@
                                 }
                             @endphp
                             {{-- {{ $diagnosis->image }} --}}
-
+                            <a href="{{ URL::to('/uploads/diagnosis/image/' . $diagnosis->image) }}" download>
+                                <i class="las la-download"></i><b>Download </b></a>
                             <div class="form-group col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                                 <img id="preview-image-before-upload"
                                     src="{{ url('/uploads/diagnosis/image/' . $diagnosis->image) }}" alt="preview image"
                                     style="max-height: 120px; border: 5px solid #555">
                             </div>
-                            <a href="{{ URL::to('/uploads/diagnosis/image/' . $diagnosis->image) }}" download>
-                                Download </a>
+
+                        </div>
+                        <div class="form-group col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                            <label class="form-label">Uploaded Audio : </label>
+                            @php
+                                $fileDatum = $diagnosis->audio;
+                                if ($fileDatum == null) {
+                                    echo '<div><small>Audio File not found.</small></div>';
+                                }
+                            @endphp
+                            {{-- {{ $diagnosis->image }} --}}
+
+                            <div class="form-group col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <audio controls>
+                                    <source src="{{ url('/uploads/diagnosis/audio/' . $diagnosis->audio) }}"
+                                        type="audio/mpeg">
+                                </audio>
+                            </div>
                         </div>
 
                     </div>
@@ -108,10 +135,6 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-
-            CKEDITOR.replace('description', {
-                height: 200
-            });
 
             $('.category').select2({
                 theme: "bootstrap",
