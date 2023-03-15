@@ -75,7 +75,7 @@ class DiagnosisApiController extends Controller
     {
         $validation = Validator::make($request->all(),[
             'title' => 'required|string|min:6',
-            'category_id' => 'required|integer|min:6|',
+            'category_id' => 'required|integer',
             'description' => 'required|string|min:6|',
             'audio' => 'required|mimes:mp3,wav',
             'image' => 'required|image',
@@ -98,7 +98,7 @@ class DiagnosisApiController extends Controller
         $diagnosis->title = $request['title'];
         $diagnosis->description = $request['description'];
         $diagnosis->category_id = $request['category_id'];
-        $diagnosis->user_id = backpack_user()->id;
+        $diagnosis->user_id = 1;
         $diagnosis->created_at = Carbon::now();
         $diagnosis->image = $image_filename ?? NULL;
         $diagnosis->audio = $audio_filename ?? NULL;
