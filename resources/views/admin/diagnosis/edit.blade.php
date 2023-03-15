@@ -58,7 +58,7 @@
                             @php
                                 $fileDatum = $diagnosis->image;
                                 if ($fileDatum == null) {
-                                    echo '<div><small>File not found.</small></div>';
+                                    echo '<div><i class="las la-times"></i><small style="color:red;>File not found.</small></div>';
                                 }
                             @endphp
                             {{-- {{ $diagnosis->image }} --}}
@@ -76,7 +76,7 @@
                             @php
                                 $fileDatum = $diagnosis->audio;
                                 if ($fileDatum == null) {
-                                    echo '<div><small>Audio File not found.</small></div>';
+                                    echo '<div> <i class="las la-times"></i><small style="color:red;">Audio File not found.</small></div>';
                                 }
                             @endphp
                             {{-- {{ $diagnosis->image }} --}}

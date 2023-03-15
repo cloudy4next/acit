@@ -81,7 +81,7 @@
                             @php
                                 $fileDatum = $data->image;
                                 if ($fileDatum == null) {
-                                    echo '<div><small>File not found.</small></div>';
+                                    echo '<div><i class="las la-times"></i><small style="color:red;>File not found.</small></div>';
                                 }
                             @endphp
                             {{-- {{ $data->image }} --}}
