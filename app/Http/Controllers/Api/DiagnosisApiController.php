@@ -98,7 +98,7 @@ class DiagnosisApiController extends Controller
         $diagnosis->title = $request['title'];
         $diagnosis->description = $request['description'];
         $diagnosis->category_id = $request['category_id'];
-        $diagnosis->user_id = 1;
+        $diagnosis->user_id = Auth::check() ? Auth::user()->id : null;
         $diagnosis->created_at = Carbon::now();
         $diagnosis->image = $image_filename ?? NULL;
         $diagnosis->audio = $audio_filename ?? NULL;
@@ -111,7 +111,8 @@ class DiagnosisApiController extends Controller
 
     public function getDiagnosis(Request $request)
     {
-        $data = Diagnosis::where('user_id', $request->id)->get();
+
+        $data = Diagnosis::where('user_id', Auth::user()->id)->get();
         $diagnosis = [];
         if($data->count() == 0)
         {
@@ -126,7 +127,7 @@ class DiagnosisApiController extends Controller
                     'image' =>$diagnosis_data->image,
                     'audio' =>$diagnosis_data->audio,
                     'response_text' =>$diagnosis_data->response_text,
-                    'category' =>$diagnosis_data->category,
+                    'category_id' =>$diagnosis_data->category_id,
 
             ];
 
