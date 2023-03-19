@@ -28,7 +28,7 @@ class FarmerRequest extends FormRequest
         return [
             'name' => 'required|min:5|max:255',
             'address' => 'required|min:5|max:255',
-            'mobile' => 'required|integer|min:5|max:255',
+            'mobile' => 'required|integer|min:11|max:11',
             'profession' => 'required|min:5|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
 

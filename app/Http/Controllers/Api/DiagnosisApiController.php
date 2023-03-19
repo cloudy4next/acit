@@ -81,10 +81,8 @@ class DiagnosisApiController extends Controller
             'image' => 'image',
         ]);
 
-        if($validation->fails()){
-
-            return response(['errors'=>$validation->errors()->all()], 422);
-
+        if($validation->fails()) {
+            return Redirect::back()->withErrors($validator);
         }
 
         if ($request->image != NULL) {

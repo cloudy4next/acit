@@ -48,6 +48,9 @@
             Settings
         </a>
         <ul class="nav-dropdown-items">
+            <li class='nav-item'><a class='nav-link' href='{{ backpack_url('bulk-sms') }}'><i
+                        class="nav-icon las la-tags"></i>
+                    Bulk SMS</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ backpack_url('user') }}"><i
                         class="nav-icon la la-user"></i>
                     <span>Users</span></a></li>
@@ -58,9 +61,7 @@
             <li class='nav-item'><a class='nav-link' href='{{ backpack_url('category') }}'><i
                         class="nav-icon las la-tags"></i>
                     Categories</a></li>
-            <li class='nav-item'><a class='nav-link' href='{{ backpack_url('bulk-sms') }}'><i
-                        class="nav-icon las la-tags"></i>
-                    Bulk SMS</a></li>
+
         </ul>
     </li>
 @endif
