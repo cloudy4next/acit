@@ -242,7 +242,7 @@ class DiagnosisApiController extends Controller
                     'title' => $post->title,
                     // 'category' => $post->category,
                     'image' => url('uploads/post/'.$post->image),
-                    'description' => json_encode($post->description),
+                    'description' =>$post->description,
                     'created_at' => $post->created_at,
             ];
     }

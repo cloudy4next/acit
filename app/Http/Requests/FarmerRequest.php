@@ -28,7 +28,7 @@ class FarmerRequest extends FormRequest
         return [
             'name' => 'required|min:5|max:255',
             'address' => 'required|min:5|max:255',
-            'mobile' => 'required|min:5|max:255',
+            'mobile' => 'required|integer|min:5|max:255',
             'profession' => 'required|min:5|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
 
@@ -56,7 +56,9 @@ class FarmerRequest extends FormRequest
     {
     return [
       'image.required' => "You must use the 'Choose file' button to select which file you wish to upload",
-      'image.max' => "Maximum file size to image is 2MB (2048 KB)",
+      'image.integer' => "Maximum file size to image is 2MB (2048 KB)",
+      'mobile.required' => "Must be Mobile Number. Ex: 01700000000,01600000000",
+
     ];
     }
 }

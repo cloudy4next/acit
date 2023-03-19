@@ -58,6 +58,9 @@
             <li class='nav-item'><a class='nav-link' href='{{ backpack_url('category') }}'><i
                         class="nav-icon las la-tags"></i>
                     Categories</a></li>
+            <li class='nav-item'><a class='nav-link' href='{{ backpack_url('bulk-sms') }}'><i
+                        class="nav-icon las la-tags"></i>
+                    Bulk SMS</a></li>
         </ul>
     </li>
 @endif
