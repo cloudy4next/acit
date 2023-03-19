@@ -22,10 +22,9 @@ class FarmerController extends Controller
     {
 
         $validation = Validator::make($request->all(),[
-            'number.*' => 'required',
-            'message' => 'required|mix:10',
+            'message' => 'required|min:10|max:2000',
         ]);
-        // dd($validation);
+
         if($validation->fails()) {
             return redirect()->back()->withErrors($validation);
         }
