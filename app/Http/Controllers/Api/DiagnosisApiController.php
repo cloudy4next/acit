@@ -124,8 +124,8 @@ class DiagnosisApiController extends Controller
             $diagnosis[] = [
                     'title' =>$diagnosis_data->title,
                     'description' =>$diagnosis_data->description,
-                    'image' =>$diagnosis_data->image,
-                    'audio' =>$diagnosis_data->audio,
+                    'image' =>url('uploads/diagnosis/image/'.$diagnosis_data->image),
+                    'audio' => url('uploads/diagnosis/audio/'.$diagnosis_data->audio),
                     'response_text' =>$diagnosis_data->response_text,
                     'category_id' =>$diagnosis_data->category_id,
 

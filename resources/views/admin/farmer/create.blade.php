@@ -41,7 +41,7 @@
                         </div>
                         <div class="form-group col-12 col-sm-12 col-md-9 col-lg-4 col-xl-4">
                             <label for="mobile">Mobile</label> <span class="text-danger">*</span>
-                            {!! Form::text('mobile', null, [
+                            {!! Form::number('mobile', null, [
                                 'class' => 'form-control mobile',
                                 'id' => 'mobile',
                                 'tabindex' => 1,

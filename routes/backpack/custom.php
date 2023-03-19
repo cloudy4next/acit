@@ -60,6 +60,8 @@ Route::group([
     });
 
     Route::get('bulk-sms', ['as' => 'admin.bulk.sms', 'uses' => 'FarmerController@bulkShow']);
+    Route::post('bulk-sms', ['as' => 'admin.bulk-sms.send', 'uses' => 'FarmerController@sendBulk']);
+
     // Route::get('farmer/{id}/edit', ['as' => 'admin.farmer.edit', 'uses' => 'farmerController@edit']);
     // Route::get('farmer/store', ['as' => 'admin.farmer.store', 'uses' => 'farmerController@store']);
     // Route::get('farmer/{id}/update', ['as' => 'admin.farmer.update', 'uses' => 'farmerController@update']);

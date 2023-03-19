@@ -1,11 +1,11 @@
 @extends('admin.layout.master', [
 'breadcrumb' => [
-{{-- 'post' => route('admin.post'), --}}
-'post add' => false,
+{{-- 'bulk-sms' => route('admin.bulk-sms'), --}}
+'bulk-sms add' => false,
 ]
 ])
 
-@section('post-title', 'Create post')
+@section('bulk-sms-title', 'Create Bulk SMS')
 
 @section('content')
     @parent
@@ -13,14 +13,14 @@
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <div class="card">
                 {!! Form::open([
-                    'route' => 'admin.post.store',
+                    'route' => 'admin.bulk-sms.send',
                     'autocomplete' => 'off',
                     'class' => 'form-horizontal',
                     'novalidate',
                     'files' => true,
                 ]) !!}
                 <div class="card-header">
-                    <i class="la la-plus"></i> Create post
+                    <i class="la la-plus"></i> Create bulk-sms
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -82,7 +82,7 @@
                                 'class' => 'form-control description',
                                 'id' => 'description',
                                 'rows' => '2',
-                                'placeholder' => 'Enter post description',
+                                'placeholder' => 'Enter bulk-sms description',
                                 'tabindex' => 5,
                                 'required' => 'required',
                                 'data-error' => trans('exam.validator_massege'),
@@ -100,7 +100,7 @@
                         <span class="mr-3"> Save </span>
                     </button>
 
-                    <a href="{!! url('/admin/post') !!}" class="btn btn-default"><span class="la la-ban"></span>
+                    <a href="{!! url('/admin/bulk-sms') !!}" class="btn btn-default"><span class="la la-ban"></span>
                         &nbsp;Cancel</a>
                 </div>
                 {!! Form::close() !!}
