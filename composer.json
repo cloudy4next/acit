@@ -9,8 +9,6 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
-        "backpack/crud": "4.1.*",
-        "backpack/permissionmanager": "*",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -18,10 +16,21 @@
         "laravel/passport": "*",
         "laravel/tinker": "^2.5",
         "laravelcollective/html": "^6.3",
-        "xenon/laravelbdsms": "^1.0"
+        "xenon/laravelbdsms": "^1.0",
+        "cloudy4next/crud": "^2.0.0",
+        "cloudy4next/permissionmanager": "1.0.1"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:cloudy4next/crud.git"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:cloudy4next/permissionmanager.git"
+        }
+    ],
     "require-dev": {
-        "backpack/generators": "*",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "mockery/mockery": "^1.4.2",
