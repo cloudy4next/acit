@@ -108,7 +108,6 @@ class DiagnosisApiController extends Controller
         $diagnosis->long =$request['long'];
 
         $diagnosis->save();
-
         return response(['message'=>'Diagnosis Send Successfully'], 200);
 
     }
