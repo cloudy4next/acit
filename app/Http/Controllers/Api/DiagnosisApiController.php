@@ -79,6 +79,9 @@ class DiagnosisApiController extends Controller
             'description' => 'required|string|min:6|',
             'audio' => 'mimes:mp3,wav',
             'image' => 'image',
+            'lat'=>'required|string',
+            'long'=>'required|string',
+
         ]);
 
         if($validation->fails()) {
@@ -101,6 +104,9 @@ class DiagnosisApiController extends Controller
         $diagnosis->created_at = Carbon::now();
         $diagnosis->image = $image_filename ?? NULL;
         $diagnosis->audio = $audio_filename ?? NULL;
+        $diagnosis->lat = $request['lat'];
+        $diagnosis->long =$request['long'];
+
         $diagnosis->save();
 
         return response(['message'=>'Diagnosis Send Successfully'], 200);

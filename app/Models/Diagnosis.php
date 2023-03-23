@@ -23,8 +23,9 @@ class Diagnosis extends Model
         'audio',
         'image',
         'video',
-        // 'is_replay',
-        // 'replay_by',
+        'lat',
+        'long',
+        'response_text',
     ];
 
     public function category()
