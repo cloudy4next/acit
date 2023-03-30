@@ -41,10 +41,19 @@ class NoticeCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('title');
-        CRUD::column('description');
-        // CRUD::column('notice_period');
+         $this->crud->enableDetailsRow();
+        $this->crud->setDetailsRowView('vendor.cloudy4next.crud.details_row.monster');
 
+
+        CRUD::column('title');
+        // CRUD::column('description');
+        // CRUD::column('notice_period');
+         $this->crud->addColumn([
+            'name' => 'description',
+            'label' => 'description',
+            'type'  => 'text',
+
+            ]);
         $this->crud->addColumn([
             'name' => 'notice_period',
             'label' => 'Notice Period',
