@@ -19,18 +19,18 @@ class CategorySeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $category = [
-        ['name' => "মৎস্য"],
-        ['name' => "পশুসম্পত্তি"],
-        ['name' => "কৃষি"],
-        ['name' => "রোগ নির্ণয়"],
+            ['name' => "মৎস্য"],
+            ['name' => "পশুসম্পত্তি"],
+            ['name' => "কৃষি"],
+            ['name' => "রোগ নির্ণয়"],
         ];
 
         foreach ($category as $cat) {
             DB::table('categories')->insert([[
-                    'name' => $cat['name'],
-                    'created_at' => date('Y-m-d H:i:s'),
-                    'updated_at' => date('Y-m-d H:i:s')
-                    ]]);
+                'name' => $cat['name'],
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ]]);
         }
     }
 }

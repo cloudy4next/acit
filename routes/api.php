@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
@@ -26,26 +27,28 @@ Route::group(['middleware' => 'cors'], function () {
     Route::post('login', ['as' => 'api.login', 'uses' => 'Api\ApiAuthController@login']);
     // no need to register from api side only log in
     // Route::post('/register', ['as' => 'api.register', 'uses' => 'Api\ApiAuthController@register']);
-});
 
-
-Route::group(['middleware' => 'auth:api'], function() {
     Route::get('get-posts/{id}', ['as' => 'api.get.posts', 'uses' => 'Api\DiagnosisApiController@getPost']);
     Route::get('market-info', ['as' => 'api.market.info', 'uses' => 'Api\DiagnosisApiController@getMarketInfo']);
     Route::get('tutorial/{id}', ['as' => 'api.get.tutorial', 'uses' => 'Api\DiagnosisApiController@getTutorial']);
     Route::get('notice', ['as' => 'api.get.notice', 'uses' => 'Api\DiagnosisApiController@getNotice']);
+    Route::get('category', ['as' => 'api.category', 'uses' => 'Api\DiagnosisApiController@getCategory']);
+});
+
+
+Route::group(['middleware' => 'auth:api'], function () {
+
     Route::get('diagnosis', ['as' => 'api.get.diagnosis', 'uses' => 'Api\DiagnosisApiController@getDiagnosis']);
     Route::post('diagnosis-store', ['as' => 'api.store.diagnosis', 'uses' => 'Api\DiagnosisApiController@storeDiagnosis']);
-    Route::get('category', ['as' => 'api.category', 'uses' => 'Api\DiagnosisApiController@getCategory']);
     Route::get('user', ['as' => 'api.user.info', 'uses' => 'Api\DiagnosisApiController@userInfo']);
 });
 
 
-Route::group(['middleware' => 'auth:api'], function() {
+Route::group(['middleware' => 'auth:api'], function () {
     Route::post('logout', ['as' => 'api.logout', 'uses' => 'Api\ApiAuthController@logout']);
 });
 
 
-Route::fallback(function (){
-        return response(['error' => 'API Resource Not Found'], 404);
+Route::fallback(function () {
+    return response(['error' => 'API Resource Not Found'], 404);
 });

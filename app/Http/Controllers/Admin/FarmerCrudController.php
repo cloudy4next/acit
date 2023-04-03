@@ -10,6 +10,7 @@ use App\Models\Farmer;
 // use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+
 /**
  * Class FarmerCrudController
  * @package App\Http\Controllers\Admin
@@ -18,7 +19,9 @@ use Illuminate\Support\Facades\DB;
 class FarmerCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation { store as traitStore; }
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation {
+        store as traitStore;
+    }
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
@@ -45,81 +48,28 @@ class FarmerCrudController extends CrudController
     {
         $this->crud->denyAccess(['update', 'show', 'create', 'delete']);
 
-        if(backpack_user()->hasPermissionTo('Farmer delete'))
-        {
+        if (backpack_user()->hasPermissionTo('Farmer delete')) {
             $this->crud->allowAccess(['delete']);
         }
 
-        if(backpack_user()->hasPermissionTo('Farmer add'))
-        {
+        if (backpack_user()->hasPermissionTo('Farmer add')) {
             $this->crud->allowAccess('create');
         }
 
         $this->crud->enableExportButtons();
-        $this->crud->denyAccess(['update','show']);
+        $this->crud->denyAccess(['update', 'show']);
         CRUD::column('name');
-        CRUD::column('mobile');
+        // CRUD::column('mobile');
         CRUD::column('login_code');
         CRUD::column('profession');
-
     }
-
-    /**
-     * Define what happens when the Create operation is loaded.
-     *
-     * @see https://backpackforlaravel.com/docs/crud-operation-create
-     * @return void
-     */
-    // protected function setupCreateOperation()
-    // {
-    //     // CRUD::setValidation(FarmerRequest::class);
-    //     $generate_code = bin2hex(random_bytes(4));
-    //     $generate_email = $generate_code .'@acitdream.com';
-
-    //     CRUD::field('name');
-    //     CRUD::field('address');
-    //     CRUD::field('mobile');
-    //     CRUD::field('profession');
-
-    //     $this->crud->addField(
-    //     [
-    //         'name'  => 'temp_email',
-    //         'type'  => 'hidden',
-    //         'value' => $generate_email,
-    //     ]);
-
-    //     $this->crud->addField(
-    //     [
-    //         'name'  => 'user_id',
-    //         'type'  => 'hidden',
-    //     ]);
-
-    //     $this->crud->addField(
-    //     [
-    //         'name'  => 'login_code',
-    //         'type'  => 'hidden',
-    //         'value' => $generate_code,
-    //     ]);
-
-    // }
-
-    // /**
-    //  * Define what happens when the Update operation is loaded.
-    //  *
-    //  * @see https://backpackforlaravel.com/docs/crud-operation-update
-    //  * @return void
-    //  */
-    // protected function setupUpdateOperation()
-    // {
-    //     $this->setupCreateOperation();
-    // }
 
     public function create()
     {
         return view('admin.farmer.create');
     }
 
-        public function store(FarmerRequest $request)
+    public function store(FarmerRequest $request)
     {
         // dd($request->profession);
 
@@ -133,27 +83,25 @@ class FarmerCrudController extends CrudController
         }
 
         $generate_code = bin2hex(random_bytes(4));
-        $generate_email = $generate_code .'@acitdream.com';
+        $generate_email = $generate_code . '@acitdream.com';
 
-        $user_id = $this->createUser($request->name,$generate_email,$generate_code);
+        $user_id = $this->createUser($request->name, $generate_email, $request->mobile);
 
         $farmer = new Farmer;
         $farmer->name = $request->name;
         $farmer->image = $fileName ?? NULL;
         $farmer->address = $request->address;
         $farmer->mobile = $request->mobile;
-        $farmer->login_code = $generate_code;
+        $farmer->login_code = $request->mobile;
         $farmer->profession = $request->profession;
         $farmer->temp_email = $generate_email;
         $farmer->user_id = $user_id;
         $farmer->save();
         // dd($farmer->id);
         return redirect('admin/farmer')->with('success', 'Sucessfully Farmer Added!');
-
-
     }
 
-    public function createUser($farmer_name,$gen_email,$gen_code) : int
+    public function createUser($farmer_name, $gen_email, $gen_code): int
     {
         $user = new User;
         $user->password = Hash::make($gen_code);
@@ -163,7 +111,6 @@ class FarmerCrudController extends CrudController
         $user->save();
 
         return $user->id;
-
     }
 
     // public function destroy($id)
