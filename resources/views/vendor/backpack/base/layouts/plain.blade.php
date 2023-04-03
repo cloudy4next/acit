@@ -7,7 +7,14 @@
 
 </head>
 
-<body class="app flex-row align-items-center">
+<body class="app flex-row align-items-center img-responsive"
+    style="background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    max-width: 100%;
+    height: auto;
+
+    background-image: url({{ asset('/assets/image/login_bg.png') }});">
 
     @yield('header')
 
