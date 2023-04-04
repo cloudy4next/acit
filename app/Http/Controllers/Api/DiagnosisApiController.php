@@ -77,7 +77,7 @@ class DiagnosisApiController extends Controller
             'title' => 'required|string|min:6',
             'category_id' => 'required|integer',
             'description' => 'required|string|min:6|',
-            'audio' => 'mimes:mp3,wav',
+            'video' => 'video|duration_max:30',
             'image' => 'image',
             'lat'=>'required|string',
             'long'=>'required|string',
@@ -92,8 +92,8 @@ class DiagnosisApiController extends Controller
         if ($request->image != NULL) {
             $image_filename = $this->attachmentStore($request->image,'image');
         }
-        if ($request->audio != NULL) {
-            $audio_filename = $this->attachmentStore($request->audio,'audio');
+        if ($request->video != NULL) {
+            $video_filename = $this->attachmentStore($request->video,'video');
         }
 
         $diagnosis = new Diagnosis();
@@ -103,7 +103,7 @@ class DiagnosisApiController extends Controller
         $diagnosis->user_id = Auth::check() ? Auth::user()->id : null;
         $diagnosis->created_at = Carbon::now();
         $diagnosis->image = $image_filename ?? NULL;
-        $diagnosis->audio = $audio_filename ?? NULL;
+        $diagnosis->video = $video_filename ?? NULL;
         $diagnosis->lat = $request['lat'];
         $diagnosis->long =$request['long'];
 

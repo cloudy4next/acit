@@ -40,7 +40,7 @@
                             @endif
                         </div>
                         <div class="form-group col-12 col-sm-12 col-md-9 col-lg-4 col-xl-4">
-                            <label for="mobile">Mobile</label> <span class="text-danger">*</span>
+                            <label for="mobile">Mobile(eg:01700000000)</label> <span class="text-danger">*</span>
                             {!! Form::number('mobile', null, [
                                 'class' => 'form-control mobile',
                                 'id' => 'mobile',

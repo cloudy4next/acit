@@ -67,38 +67,37 @@
                             <div class="form-group col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                                 <img id="preview-image-before-upload"
                                     src="{{ url('/uploads/diagnosis/image/' . $diagnosis->image) }}" alt="preview image"
-                                    style="max-height: 120px; border: 5px solid #555">
+                                    style="max-height: 120px; border: 5px solid #8b14cb">
                             </div>
 
                         </div>
                         <div class="form-group col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                            <label class="form-label">Uploaded Audio : </label>
+                            <label class="form-label">Uploaded Video : </label>
                             @php
-                                $fileDatum = $diagnosis->audio;
+                                $fileDatum = $diagnosis->video;
                                 if ($fileDatum == null) {
-                                    echo '<div> <i class="las la-times"></i><small style="color:red;">Audio File not found.</small></div>';
+                                    echo '<div> <h6 style="color:red;"><i class="las la-times">File not uploaded/found!!</i></h6></div>';
                                 }
                             @endphp
-                            {{-- {{ $diagnosis->image }} --}}
 
                             <div class="form-group col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                                <audio controls>
-                                    <source src="{{ url('/uploads/diagnosis/audio/' . $diagnosis->audio) }}"
-                                        type="audio/mpeg">
-                                </audio>
+                                <video controls style="max-height: 130px; max-width: 220px; border: 5px solid #8f0bf4">
+                                    <source src="{{ url('/uploads/diagnosis/video/' . $diagnosis->video) }}"
+                                        type="video/mp4">
+                                </video>
                             </div>
                         </div>
 
                     </div>
                     <div class="row">
-                        <div class="form-group col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="form-group col-12 col-sm-12 col-md-12 col-lg-12 col-xl-10">
                             <label for="replay"> Replay </label><span class="text-danger">*</span>
                             {!! Form::textarea('replay', $diagnosis->replay, [
                                 'class' => 'form-control replay',
                                 'id' => 'replay',
                                 'rows' => '2',
                                 'placeholder' => 'Enter Reply',
-                                'tabindex' => 5,
+                                'tabindex' => 2,
                                 'required' => 'required',
                                 'diagnosis-error' => trans('exam.validator_massege'),
                             ]) !!}
@@ -134,6 +133,24 @@
     <script src="https://cdn.ckeditor.com/4.15.1/standard-all/ckeditor.js"></script>
 
     <script type="text/javascript">
+        function initMap() {
+            const myLatLng = {
+                lat: 22.2734719,
+                lng: 70.7512559
+            };
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 5,
+                center: myLatLng,
+            });
+
+            new google.maps.Marker({
+                position: myLatLng,
+                map,
+                title: "Hello Rajkot!",
+            });
+        }
+
+        window.initMap = initMap;
         $(document).ready(function() {
 
             $('.category').select2({
@@ -147,4 +164,6 @@
             });
         });
     </script>
+    <script type="text/javascript"
+        src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&callback=initMap"></script>
 @endpush
