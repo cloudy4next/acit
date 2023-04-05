@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\DiagnosisRequest;
 use App\Models\Diagnosis;
+use App\Models\Stakeholder;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use Symfony\Component\HttpFoundation\Request;
@@ -51,8 +52,12 @@ class DiagnosisCrudController extends CrudController
             $this->crud->addButtonFromModelFunction('line', 'editMessage', 'editMessage', 'end');
 
         }
+        $stakeholder_cat = Stakeholder::where('user_id', backpack_user()->id)->pluck('category_id');
 
-
+        if($stakeholder_cat[0] != null)
+        {
+            $this->crud->addClause('where', 'category_id','=', $stakeholder_cat);
+        }
 
         CRUD::column('title');
         CRUD::column('user_id');
