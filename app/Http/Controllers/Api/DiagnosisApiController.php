@@ -148,7 +148,7 @@ class DiagnosisApiController extends Controller
     {
         // dd($id);
 
-        $data = Post::where('category_id',$id)->get();
+        $data = Post::where('category_id',$id)->orderBy('id', 'DESC')->get();
         $post = [];
 
         foreach($data as $post_data)
@@ -211,7 +211,7 @@ class DiagnosisApiController extends Controller
     {
 
         // dd($id);
-        $data = Tutorial::where('category_id',$id)->get();
+        $data = Tutorial::where('category_id',$id)->orderBy('id', 'DESC')->get();
         $tutorial = [];
 
         if($data->count() == 0)
