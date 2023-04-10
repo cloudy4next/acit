@@ -35,11 +35,11 @@ class ApiAuthController extends Controller
 
     public function login (Request $request) {
         $validator = Validator::make($request->all(), [
-            'loginCode' => 'required|integer|min:6',
+            'loginCode' => 'required|integer',
         ]);
         if ($validator->fails())
         {
-            return response(['message'=>' must be at least 8 Digits'], 422);
+            return response(['message'=>'Must be 11 Digits mobile number'], 422);
         }
         //---------convert code to mail too validate each email and password ------------//
 
