@@ -35,7 +35,7 @@ class ApiAuthController extends Controller
 
     public function login (Request $request) {
         $validator = Validator::make($request->all(), [
-            'loginCode' => 'required|string|min:8|max:8',
+            'loginCode' => 'required|string|min:6',
         ]);
         if ($validator->fails())
         {
