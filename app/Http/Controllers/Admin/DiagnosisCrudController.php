@@ -54,10 +54,13 @@ class DiagnosisCrudController extends CrudController
         }
         $stakeholder_cat = Stakeholder::where('user_id', backpack_user()->id)->pluck('category_id');
 
-        if($stakeholder_cat[0] != null)
-        {
-            $this->crud->addClause('where', 'category_id','=', $stakeholder_cat);
+        if(sizeof($stakeholder_cat) == 0){
+            if($stakeholder_cat[0] != null)
+            {
+                $this->crud->addClause('where', 'category_id','=', $stakeholder_cat);
+            }
         }
+
 
         CRUD::column('title');
         CRUD::column('user_id');
