@@ -83,7 +83,7 @@ class FarmerCrudController extends CrudController
         }
 
         $generate_code = bin2hex(random_bytes(4));
-        $generate_email = $generate_code . '@acitdream.com';
+        $generate_email = $request->mobile . '@acitdream.com';
 
         $user_id = $this->createUser($request->name, $generate_email, $request->mobile);
 
