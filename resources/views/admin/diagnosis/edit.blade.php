@@ -55,20 +55,20 @@
 
                         <div class="form-group col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                             <label class="form-label">Uploaded Image : </label>
-                            @php
-                                $fileDatum = $diagnosis->image;
-                                if ($fileDatum == null) {
-                                    echo '<div><i class="las la-times"></i><small style="color:red;>File not found.</small></div>';
-                                }
-                            @endphp
-                            {{-- {{ $diagnosis->image }} --}}
-                            <a href="{{ URL::to('/uploads/diagnosis/image/' . $diagnosis->image) }}" download>
-                                <i class="las la-download"></i><b>Download </b></a>
-                            <div class="form-group col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                                <img id="preview-image-before-upload"
-                                    src="{{ url('/uploads/diagnosis/image/' . $diagnosis->image) }}" alt="preview image"
-                                    style="max-height: 120px; border: 5px solid #8b14cb">
-                            </div>
+                            @if ($diagnosis->image == null)
+                                <div><i class="las la-times"></i><small style="color:red;>File not found."</small></div>
+                            @else
+                                @foreach (json_decode($diagnosis->image) as $image)
+                                    <a href="{{ URL::to('/uploads/diagnosis/image/' . $image) }}" download>
+                                        <i class="las la-download"></i><b>Download </b></a>
+                                @endforeach
+
+                                <div class="form-group col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                    <img id="preview-image-before-upload"
+                                        src="{{ url('/uploads/diagnosis/image/' . $image) }}" alt="preview image"
+                                        style="max-height: 130px; max-width: 220px; border: 5px solid #8b14cb">
+                                </div>
+                            @endif
 
                         </div>
                         <div class="form-group col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">

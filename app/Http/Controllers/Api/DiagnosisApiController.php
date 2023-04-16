@@ -73,25 +73,32 @@ class DiagnosisApiController extends Controller
 
     public function storeDiagnosis(Request $request)
     {
+        // dd($request->all());
         $validation = Validator::make($request->all(),[
             'title' => 'required|string|min:6',
             'category_id' => 'required|integer',
             'description' => 'required|string|min:6|',
-            'video' => 'video|duration_max:30',
-            'image' => 'image',
+            'images[]' => 'image|mimes:jpg,png,jpeg|max:2048',
             'lat'=>'required|string',
             'long'=>'required|string',
-
+            'video' => 'video|duration_max:30',
         ]);
+        // dd($request->images);
 
         if($validation->fails()) {
             return response(['errors'=>$validation->errors()->all()], 422);
 
         }
 
-        if ($request->image != NULL) {
-            $image_filename = $this->attachmentStore($request->image,'image');
+        if ($request->images != NULL) {
+            $image_list = [];
+            foreach ($request->images as $image) {
+                $image_filename = $this->attachmentStore($image,'image');
+                // $image_list[] = $image_filename;
+                array_push($image_list,$image_filename);
+            }
         }
+        // dd($image_list);
         if ($request->video != NULL) {
             $video_filename = $this->attachmentStore($request->video,'video');
         }
@@ -102,7 +109,7 @@ class DiagnosisApiController extends Controller
         $diagnosis->category_id = $request['category_id'];
         $diagnosis->user_id = Auth::check() ? Auth::user()->id : null;
         $diagnosis->created_at = Carbon::now();
-        $diagnosis->image = $image_filename ?? NULL;
+        $diagnosis->image= json_encode($image_list) ?? NULL;
         $diagnosis->video = $video_filename ?? NULL;
         $diagnosis->lat = $request['lat'];
         $diagnosis->long =$request['long'];
