@@ -10,10 +10,13 @@
     "require": {
         "php": "^7.3|^8.0",
         "cloudy4next/crud": "^2.0.0",
+        "cloudy4next/generators": "4.1.1",
         "cloudy4next/permissionmanager": "1.0.1",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "intervention/image": "^2.7",
+        "kreait/laravel-firebase": "^2.1",
         "laravel/framework": "^8.12",
         "laravel/passport": "*",
         "laravel/tinker": "^2.5",
@@ -29,6 +32,10 @@
         {
             "type": "vcs",
             "url": "git@github.com:cloudy4next/permissionmanager.git"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:cloudy4next/generators.git"
         }
     ],
     "require-dev": {

@@ -18,7 +18,10 @@ class Category extends Model
     {
         return $this->hasMany('App\Models\Tutorial');
     }
-
+    public function staticpages()
+    {
+        return $this->hasMany('App\Models\StaticPage');
+    }
     public function posts()
     {
         return $this->hasMany('App\Models\Post');

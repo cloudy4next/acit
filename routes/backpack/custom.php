@@ -74,4 +74,5 @@ Route::group([
     // Route::post('farmer-store', ['as' => 'admin.farmer.store', 'uses' => 'FarmerController@getUserName']);
     // Route::post('farmer/delete/{id}', ['as' => 'admin.farmer.delete', 'uses' => 'FarmerController@deleteFarmer']);
 
+    Route::crud('staticpage', 'StaticPageCrudController');
 }); // this should be the absolute last line of this file
