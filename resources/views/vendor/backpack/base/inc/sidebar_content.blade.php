@@ -4,7 +4,7 @@
 
 @if (backpack_user()->hasPermissionTo('Farmer'))
     <li class='nav-item'><a class='nav-link' href='{{ backpack_url('farmer') }}'>
-            <i class="las la-users"></i>
+            <i class="nav-icon las la-users"></i>
             Farmers</a></li>
 @endif
 
@@ -61,10 +61,8 @@
             <li class='nav-item'><a class='nav-link' href='{{ backpack_url('category') }}'><i
                         class="nav-icon las la-tags"></i>
                     Categories</a></li>
-
+            <li class='nav-item'><a class='nav-link' href='{{ backpack_url('staticpage') }}'><i
+                        class="nav-icon las la-universal-access"></i> Static Page</a></li>
         </ul>
     </li>
 @endif
-
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('staticpage') }}'><i
-            class='nav-icon la la-question'></i> StaticPages</a></li>

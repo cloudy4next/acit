@@ -40,6 +40,7 @@ class FirebaseController extends Controller
                 'title' => $data->title,
                 'image' => $data->image,
                 'description' => $data->description,
+                'category_id' => $data->category_id,
                 'created_at' => $data->created_at,
             ]);
         }
