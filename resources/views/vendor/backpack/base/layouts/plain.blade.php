@@ -7,7 +7,8 @@
 
 </head>
 
-<body class="app flex-row align-items-center">
+<body class="app flex-row align-items-center h-100"
+    style="background-image:url({{ asset('assets/image/bg.png') }}); background-size: cover;">
 
     @yield('header')
 
