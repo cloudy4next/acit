@@ -13,9 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return redirect('/admin/login');
-});
+// Route::get('/', function () {
+//     return redirect('/admin/login');
+// });
+
+Route::redirect('/', '/admin/login');
 
 Route::get('/privacy-policy', function () {
     return view('home.privacy_policy');
