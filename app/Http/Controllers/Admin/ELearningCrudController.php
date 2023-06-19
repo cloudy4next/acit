@@ -96,6 +96,8 @@ class ELearningCrudController extends CrudController
 
     public function store(ELearningRequest $request)
     {
+        CRUD::setValidation(ELearningRequest::class);
+
         $eleraning = new ELearning();
         $eleraning->title = $request['title'];
         $eleraning->description = $request['description'];
@@ -121,7 +123,7 @@ class ELearningCrudController extends CrudController
 
     public function update(ELearningRequest $request, $id)
     {
-        $data = ELearning::where('id', '=', $id)->first();
+        CRUD::setValidation(ELearningRequest::class);
 
         $post = ELearning::find($id);
         $post->title = $request['title'];
