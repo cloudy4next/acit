@@ -33,6 +33,7 @@ Route::group(['middleware' => 'cors'], function () {
     Route::get('tutorial/{id}', ['as' => 'api.get.tutorial', 'uses' => 'Api\DiagnosisApiController@getTutorial']);
     Route::get('notice', ['as' => 'api.get.notice', 'uses' => 'Api\DiagnosisApiController@getNotice']);
     Route::get('category', ['as' => 'api.category', 'uses' => 'Api\DiagnosisApiController@getCategory']);
+    Route::get('e-learning', ['as' => 'api.e-learning', 'uses' => 'Api\DiagnosisApiController@elearning']);
 });
 
 
