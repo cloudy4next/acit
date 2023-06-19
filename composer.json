@@ -9,6 +9,9 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "cloudy4next/crud": "^2.0.0",
+        "cloudy4next/generators": "4.1.1",
+        "cloudy4next/permissionmanager": "1.0.1",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -17,8 +20,8 @@
         "laravel/tinker": "^2.5",
         "laravelcollective/html": "^6.3",
         "xenon/laravelbdsms": "^1.0",
-        "cloudy4next/crud": "^2.0.0",
-        "cloudy4next/permissionmanager": "1.0.1"
+        "cloudy4next/filemanager": "4.1.1"
+
     },
     "repositories": [
         {
@@ -28,7 +31,16 @@
         {
             "type": "vcs",
             "url": "git@github.com:cloudy4next/permissionmanager.git"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:cloudy4next/generators.git"
+        },
+                {
+            "type": "vcs",
+            "url": "git@github.com:cloudy4next/filemanager.git"
         }
+
     ],
     "require-dev": {
         "facade/ignition": "^2.5",

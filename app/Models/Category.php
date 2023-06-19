@@ -38,4 +38,8 @@ class Category extends Model
     {
         return $this->hasMany('App\Models\Messages');
     }
+    public function e_learnings()
+    {
+        return $this->hasMany('App\Models\ELearning');
+    }
 }

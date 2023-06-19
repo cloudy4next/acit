@@ -29,7 +29,7 @@ class Farmer extends Model
         'id',
     ];
 
-        public function user()
+    public function user()
     {
         return $this->belongsTo('App\Models\User');
     }

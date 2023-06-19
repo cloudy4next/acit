@@ -29,34 +29,32 @@ Route::group([
 
     Route::group(['middleware' => 'acl:Settings'], function () {
         Route::crud('category', 'CategoryCrudController');
-
+        Route::crud('elearning', 'ELearningCrudController');
+        Route::post('e-learning/store', ['as' => 'admin.e-learning.store', 'uses' => 'ELearningCrudController@store']);
+        Route::get('e-learning/{id}/edit', ['as' => 'admin.e-learning.edit', 'uses' => 'ELearningCrudController@edit']);
+        Route::post('e-learning/{id}/update', ['as' => 'admin.e-learning.update', 'uses' => 'ELearningCrudController@update']);
     });
     Route::group(['middleware' => 'acl:Tutorial'], function () {
         Route::crud('tutorial', 'TutorialCrudController');
-
     });
-        Route::group(['middleware' => 'acl:Notice'], function () {
-            Route::crud('notice', 'NoticeCrudController');
-
+    Route::group(['middleware' => 'acl:Notice'], function () {
+        Route::crud('notice', 'NoticeCrudController');
     });
-        Route::group(['middleware' => 'acl:Diagnosis'], function () {
-            Route::crud('diagnosis', 'DiagnosisCrudController');
-            Route::get('diagnosis/{id}/reply-message', ['as' => 'admin.diagnosis.edit.message', 'uses' => 'DiagnosisCrudController@messageData']);
-            Route::post('diagnosis/{id}/message-update', ['as' => 'admin.diagnosis.update', 'uses' => 'DiagnosisCrudController@replyMessage']);
-
+    Route::group(['middleware' => 'acl:Diagnosis'], function () {
+        Route::crud('diagnosis', 'DiagnosisCrudController');
+        Route::get('diagnosis/{id}/reply-message', ['as' => 'admin.diagnosis.edit.message', 'uses' => 'DiagnosisCrudController@messageData']);
+        Route::post('diagnosis/{id}/message-update', ['as' => 'admin.diagnosis.update', 'uses' => 'DiagnosisCrudController@replyMessage']);
     });
-        Route::group(['middleware' => 'acl:Farmer'], function () {
+    Route::group(['middleware' => 'acl:Farmer'], function () {
 
         Route::crud('farmer', 'FarmerCrudController');
         Route::post('/farmer-store', ['as' => 'admin.farmer.store', 'uses' => 'FarmerCrudController@store']);
-
     });
-        Route::group(['middleware' => 'acl:Market'], function () {
-                Route::crud('market-price', 'MarketPriceCrudController');
+    Route::group(['middleware' => 'acl:Market'], function () {
+        Route::crud('market-price', 'MarketPriceCrudController');
     });
-        Route::group(['middleware' => 'acl:StakeHolder'], function () {
-                Route::crud('stakeholder', 'StakeholderCrudController');
-
+    Route::group(['middleware' => 'acl:StakeHolder'], function () {
+        Route::crud('stakeholder', 'StakeholderCrudController');
     });
 
     Route::get('bulk-sms', ['as' => 'admin.bulk.sms', 'uses' => 'FarmerController@bulkShow']);
