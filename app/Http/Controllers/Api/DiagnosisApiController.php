@@ -268,6 +268,7 @@ class DiagnosisApiController extends Controller
             'title' => $eData->title,
             'description' => $eData->description,
             'e_category' => $eData->e_category,
+            'image' => 'uploads/e_learning/' . $eData->images,
             'created_at' => $eData->created_at,
         ];
     }
