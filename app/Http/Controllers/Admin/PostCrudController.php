@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Support\Carbon;
 use File;
+
 /**
  * Class PostCrudController
  * @package App\Http\Controllers\Admin
@@ -44,18 +45,15 @@ class PostCrudController extends CrudController
     {
         $this->crud->denyAccess(['update', 'show', 'create', 'delete']);
 
-        if(backpack_user()->hasPermissionTo('Post delete'))
-        {
+        if (backpack_user()->hasPermissionTo('Post delete')) {
             $this->crud->allowAccess(['delete']);
         }
 
-        if(backpack_user()->hasPermissionTo('Post store'))
-        {
+        if (backpack_user()->hasPermissionTo('Post store')) {
             $this->crud->allowAccess('create');
         }
 
-        if(backpack_user()->hasPermissionTo('Post edit'))
-        {
+        if (backpack_user()->hasPermissionTo('Post edit')) {
             $this->crud->allowAccess('update');
         }
 
@@ -68,7 +66,7 @@ class PostCrudController extends CrudController
 
         CRUD::column('title');
         // CRUD::column('category_id');
-            $this->crud->addColumn([
+        $this->crud->addColumn([
             'name' => 'category_id',
             'label' => 'Type',
         ]);
@@ -129,7 +127,7 @@ class PostCrudController extends CrudController
     }
     public function update(postRequest $request, $id)
     {
-        $data = post::where('id', '=', $id)->first();
+        $data = Post::where('id', '=', $id)->first();
 
         if (File::exists(public_path('uploads/post/' . $data->image))) {
             File::delete(public_path('uploads/post/' . $data->image));

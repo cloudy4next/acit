@@ -13,7 +13,7 @@ class ELearning extends Model
     protected $fillable = [
         'title',
         'description',
-        'category_id',
+        'e_category',
         'images',
     ];
 

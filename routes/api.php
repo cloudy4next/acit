@@ -34,6 +34,7 @@ Route::group(['middleware' => 'cors'], function () {
     Route::get('notice', ['as' => 'api.get.notice', 'uses' => 'Api\DiagnosisApiController@getNotice']);
     Route::get('category', ['as' => 'api.category', 'uses' => 'Api\DiagnosisApiController@getCategory']);
     Route::get('e-learning', ['as' => 'api.e-learning', 'uses' => 'Api\DiagnosisApiController@elearning']);
+    Route::get('e-learning/{e_category}', ['as' => 'api.e-learning.single', 'uses' => 'Api\DiagnosisApiController@elearningSingle']);
 });
 
 

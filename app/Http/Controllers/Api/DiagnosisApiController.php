@@ -267,8 +267,23 @@ class DiagnosisApiController extends Controller
         return  [
             'title' => $eData->title,
             'description' => $eData->description,
-            'category_id' => $eData->category_id,
+            'e_category' => $eData->e_category,
             'created_at' => $eData->created_at,
         ];
+    }
+
+    public function elearningSingle(string $e_category)
+    {
+        $data = ELearning::where('e_category', 'LIKE', '%' . $e_category . '%')->get();
+        $e_data = [];
+
+        if ($data->count() == 0) {
+            return response(['error' => 'Noting Found!'], 404);
+        }
+
+        foreach ($data as $e_cat) {
+            $e_data[] = $this->elearningResponse($e_cat);
+        }
+        return response(['message' => 'success', 'count' => $data->count(), 'data' => $e_data], 200);
     }
 }

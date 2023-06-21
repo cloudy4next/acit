@@ -8,6 +8,7 @@ use App\Models\ELearning;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use Illuminate\Support\Carbon;
+use File;
 
 /**
  * Class ELearningCrudController
@@ -44,8 +45,10 @@ class ELearningCrudController extends CrudController
     {
 
         CRUD::column('title');
-        CRUD::column('category_id');
+        CRUD::column('e_category');
         CRUD::column('description');
+        CRUD::column('created_at');
+
         /**
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');
@@ -64,7 +67,7 @@ class ELearningCrudController extends CrudController
         CRUD::setValidation(ELearningRequest::class);
 
         CRUD::addField('title');
-        CRUD::addField('category_id');
+        CRUD::addField('e_category');
         CRUD::addField('description');
 
         /**
@@ -98,10 +101,21 @@ class ELearningCrudController extends CrudController
     {
         CRUD::setValidation(ELearningRequest::class);
 
+        $attachments = $request->image;
+        if ($attachments != NULL) {
+            $destinationPath = public_path() . "/uploads/e_learning";
+            $name = $attachments->getClientOriginalName();
+            $fileName = time() . '_' . $name;
+            $fileName = preg_replace('/\s+/', '_', $fileName);
+            $attachments->move($destinationPath, $fileName);
+        }
+
         $eleraning = new ELearning();
         $eleraning->title = $request['title'];
         $eleraning->description = $request['description'];
-        $eleraning->category_id = $request['category_id'];
+        $eleraning->e_category = $request['e_category'];
+        $eleraning->images = $fileName ?? NULL;
+
         $eleraning->created_at = Carbon::now();
         $eleraning->save();
 
@@ -125,13 +139,29 @@ class ELearningCrudController extends CrudController
     {
         CRUD::setValidation(ELearningRequest::class);
 
-        $post = ELearning::find($id);
-        $post->title = $request['title'];
-        $post->description = $request['description'];
-        $post->category_id = $request['category_id'];
-        $post->created_at = Carbon::now();
+        $data = ELearning::where('id', '=', $id)->first();
 
-        $post->save();
+        if (File::exists(public_path('uploads/e_learning/' . $data->images))) {
+            File::delete(public_path('uploads/e_learning/' . $data->images));
+        }
+
+        $attachments = $request->image;
+        if ($attachments != NULL) {
+            $destinationPath = public_path() . "/uploads/e_learning";
+            $name = $attachments->getClientOriginalName();
+            $fileName = time() . '_' . $name;
+            $fileName = preg_replace('/\s+/', '_', $fileName);
+            $attachments->move($destinationPath, $fileName);
+        }
+
+        $eleraning = ELearning::find($id);
+        $eleraning->title = $request['title'];
+        $eleraning->description = $request['description'];
+        $eleraning->e_category = $request['e_category'];
+        $eleraning->images = $fileName ?? NULL;
+        $eleraning->created_at = Carbon::now();
+
+        $eleraning->save();
         \Alert::success('E-learning successfully updated!')->flash();
 
         // return redirect()->back()->withInput();
