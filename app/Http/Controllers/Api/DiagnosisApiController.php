@@ -275,7 +275,8 @@ class DiagnosisApiController extends Controller
 
     public function elearningSingle(string $e_category)
     {
-        $data = ELearning::where('e_category', 'LIKE', '%' . $e_category . '%')->get();
+        $data = ELearning::where('e_category', 'LIKE', '%' . $e_category . '%')
+            ->where('title', 'LIKE', '%' . $e_category . '%')->get();
         $e_data = [];
 
         if ($data->count() == 0) {

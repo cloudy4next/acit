@@ -13,7 +13,8 @@ use Laravel\Passport\Passport;
 class ApiAuthController extends Controller
 {
 
-   public function register (Request $request) {
+    public function register(Request $request)
+    {
         // no need to register from api side only log in
 
         $validator = Validator::make($request->all(), [
@@ -21,11 +22,10 @@ class ApiAuthController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
-        if ($validator->fails())
-        {
-            return response(['errors'=>$validator->errors()->all()], 422);
+        if ($validator->fails()) {
+            return response(['errors' => $validator->errors()->all()], 422);
         }
-        $request['password']=Hash::make($request['password']);
+        $request['password'] = Hash::make($request['password']);
         $request['remember_token'] = Str::random(10);
         $user = User::create($request->toArray());
         $token = $user->createToken('Laravel Password Grant Client')->accessToken;
@@ -33,35 +33,36 @@ class ApiAuthController extends Controller
         return response($response, 200);
     }
 
-    public function login (Request $request) {
+    public function login(Request $request)
+    {
         $validator = Validator::make($request->all(), [
-            'loginCode' => 'required|string|min:8|max:8',
+            'loginCode' => 'required|string|min:11|max:14',
         ]);
-        if ($validator->fails())
-        {
-            return response(['message'=>' must be at least 8 characters'], 422);
+        if ($validator->fails()) {
+            return response(['message' => 'Number Not Registred!'], 422);
         }
         //---------convert code to mail too validate each email and password ------------//
 
-        $generate_email = $request->loginCode .'@acitdream.com';
+        $generate_email = $request->loginCode . '@acitdream.com';
 
         $user = User::where('email', $generate_email)->first();
         if ($user) {
             if (Hash::check($request->loginCode, $user->password)) {
                 $token = $user->createToken('Laravel Password Grant Client')->accessToken;
-                $response = ['message'=>'success','token' => $token];
+                $response = ['message' => 'success', 'token' => $token];
                 return response($response, 200);
             } else {
                 $response = ["message" => "Password mismatch"];
                 return response($response, 422);
             }
         } else {
-            $response = ["message" =>'User does not exist'];
+            $response = ["message" => 'User does not exist'];
             return response($response, 422);
         }
     }
 
-    public function logout (Request $request) {
+    public function logout(Request $request)
+    {
         $token = $request->user()->token();
         $token->revoke();
         $response = ['message' => 'You have been successfully logged out!'];
