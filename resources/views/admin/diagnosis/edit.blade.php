@@ -72,7 +72,7 @@
 
                         </div>
                         <div class="form-group col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                            <label class="form-label">Uploaded Audio : </label>
+                            <label class="form-label">Uploaded Video : </label>
                             @php
                                 $fileDatum = $diagnosis->audio;
                                 if ($fileDatum == null) {
@@ -82,10 +82,10 @@
                             {{-- {{ $diagnosis->image }} --}}
 
                             <div class="form-group col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                                <audio controls>
+                                <video controls style="max-height: 120px; border: 5px solid #555">
                                     <source src="{{ url('/uploads/diagnosis/audio/' . $diagnosis->audio) }}"
                                         type="audio/mpeg">
-                                </audio>
+                                </video>
                             </div>
                         </div>
 

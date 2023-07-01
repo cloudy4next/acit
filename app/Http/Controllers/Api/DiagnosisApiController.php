@@ -72,7 +72,7 @@ class DiagnosisApiController extends Controller
             'title' => 'required|string|min:6',
             'category_id' => 'required|integer',
             'description' => 'required|string|min:6|',
-            'audio' => 'mimes:mp3,wav',
+            'audio' => 'mimes:mp4',
             'image' => 'image',
             'lat' => 'required|string',
             'long' => 'required|string',
@@ -94,7 +94,7 @@ class DiagnosisApiController extends Controller
         $diagnosis->title = $request['title'];
         $diagnosis->description = $request['description'];
         $diagnosis->category_id = $request['category_id'];
-        $diagnosis->user_id = Auth::check() ? Auth::user()->id : null;
+        $diagnosis->user_id = Auth::user()->id;
         $diagnosis->created_at = Carbon::now();
         $diagnosis->image = $image_filename ?? NULL;
         $diagnosis->audio = $audio_filename ?? NULL;
