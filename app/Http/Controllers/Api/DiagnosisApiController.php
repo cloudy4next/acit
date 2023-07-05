@@ -275,9 +275,10 @@ class DiagnosisApiController extends Controller
 
     public function elearningSingleCat(Request $request)
     {
+        $childParent = Category::where('category_id', $request->id)
+        ->where('parent_id', $request->id)->get()->toArray();
 
-        $data = ELearning::where('category_id', $request->id)
-            ->where('parent_id', $request->id)->get();
+        $data = ELearning::whereIn('category_id', $childParent)->get();
 
         $e_data = [];
 
