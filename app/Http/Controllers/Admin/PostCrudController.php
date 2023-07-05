@@ -83,12 +83,15 @@ class PostCrudController extends CrudController
          * - CRUD::addColumn(['name' => 'price', 'type' => 'number']);
          */
     }
+
+    public function category()
+    {
+        return Category::where('parent_id', null)->pluck('name', 'id');
+    }
     public function create()
     {
-        $category = Category::pluck('name', 'id');
-
         return view('admin.post.create')
-            ->withcategory($category);
+            ->withcategory($this->category());
     }
 
     public function store(PostRequest $request)
@@ -122,7 +125,7 @@ class PostCrudController extends CrudController
         $data = post::where('id', '=', $id)->first();
 
         return view('admin.post.edit')
-            ->withcategory($category)
+            ->withcategory($this->category())
             ->withData($data);
     }
     public function update(postRequest $request, $id)

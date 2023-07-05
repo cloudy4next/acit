@@ -35,7 +35,7 @@ class DiagnosisApiController extends Controller
             'image' => url('uploads/farmer/' . $data->farmer->image),
             'mobile' => $data->farmer->mobile,
             'address' => $data->farmer->address,
-            'profession' =>  $data->farmer->profession,
+            'profession' => $data->farmer->profession,
 
         ];
 
@@ -204,7 +204,7 @@ class DiagnosisApiController extends Controller
 
     public function marketResponse($market_data): array
     {
-        return  [
+        return [
             'name' => $market_data->name,
             'amount' => $market_data->amount,
         ];
@@ -212,7 +212,7 @@ class DiagnosisApiController extends Controller
 
     public function postResponse($post): array
     {
-        return  [
+        return [
             'title' => $post->title,
             // 'category' => $post->category,
             'image' => url('uploads/post/' . $post->image),
@@ -225,7 +225,7 @@ class DiagnosisApiController extends Controller
     {
         preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user|shorts)\/))([^\?&\"'>]+)/", $tutorial->url, $matches);
 
-        return  [
+        return [
             'title' => $tutorial->title,
             'description' => $tutorial->description,
             'url' => $matches[1],
@@ -236,7 +236,7 @@ class DiagnosisApiController extends Controller
 
     public function noticeResponse($notice_data): array
     {
-        return  [
+        return [
             'title' => $notice_data->title,
             'description' => $notice_data->description,
             'notice_period' => $notice_data->notice_period,
@@ -264,19 +264,22 @@ class DiagnosisApiController extends Controller
 
     public function elearningResponse(object $eData): array
     {
-        return  [
+        return [
             'title' => $eData->title,
             'description' => $eData->description,
-            'e_category' => $eData->e_category,
+            'category_id' => $eData->category_id,
             'image' => 'uploads/e_learning/' . $eData->images,
             'created_at' => $eData->created_at,
         ];
     }
 
-    public function elearningSingle(string $e_category)
+    public function elearningSingle(Request $request)
     {
-        $data = ELearning::where('e_category', 'LIKE', '%' . $e_category . '%')
-            ->where('title', 'LIKE', '%' . $e_category . '%')->get();
+        $searchTeam = $request->q;
+
+        $data = ELearning::where('category_id', $request->category)
+            ->where('title', 'LIKE', '%' . $searchTeam . '%')
+            ->orwhere('description', 'LIKE', '%' . $searchTeam . '%')->get();
         $e_data = [];
 
         if ($data->count() == 0) {
@@ -286,6 +289,7 @@ class DiagnosisApiController extends Controller
         foreach ($data as $e_cat) {
             $e_data[] = $this->elearningResponse($e_cat);
         }
+
         return response(['message' => 'success', 'count' => $data->count(), 'data' => $e_data], 200);
     }
 }

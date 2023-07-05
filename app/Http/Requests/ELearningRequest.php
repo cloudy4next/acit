@@ -27,7 +27,7 @@ class ELearningRequest extends FormRequest
         return [
             'title' => 'required',
             'description' => 'required',
-            'e_category' => 'required',
+            'category_id' => 'required',
             'image' => 'required|image|max:2048'
 
         ];

@@ -43,22 +43,17 @@
 
                     <div class="row">
                         <div class="form-group col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
-                            <label for="e_category"> Category </label> <span class="text-danger">*</span>
-                            {!! Form::select(
-                                'e_category',
-                                ['Livestock' => 'Livestock', 'Agriculture' => 'Agriculture', 'Fisheries' => 'Fisheries'],
-                                'Livestock',
-                                [
-                                    'class' => 'form-control e_category',
-                                    'id' => 'e_category',
-                                    'tabindex' => 2,
-                                    'required' => 'required',
-                                    'data-error' => 'This field is required',
-                                ],
-                            ) !!}
+                            <label for="category_id"> Category </label> <span class="text-danger">*</span>
+                            {!! Form::select('category_id', $category, null, [
+                                'class' => 'form-control category',
+                                'id' => 'category_id',
+                                'tabindex' => 2,
+                                'required' => 'required',
+                                'data-error' => 'This field is required',
+                            ]) !!}
                             <div class="help-block with-errors text-danger"></div>
-                            @if ($errors->has('e_category'))
-                                <span class="text-danger"><strong>{{ $errors->first('e_category') }}</strong></span>
+                            @if ($errors->has('category_id'))
+                                <span class="text-danger"><strong>{{ $errors->first('category_id') }}</strong></span>
                             @endif
                         </div>
                         <div class="row">

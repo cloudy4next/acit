@@ -62,6 +62,7 @@ class TutorialCrudController extends CrudController
             'label' => '#',
             'orderable' => false,
         ])->makeFirstColumn();
+
         CRUD::column('title');
 
             $this->crud->addColumn([
@@ -91,7 +92,20 @@ class TutorialCrudController extends CrudController
     {
         CRUD::setValidation(TutorialRequest::class);
 
-        CRUD::field('category_id');
+        // CRUD::field('category_id');
+
+        $this->crud->addField([  // Select
+            'label'     => "Category",
+            'type'      => 'select',
+            'name'      => 'category_id',
+            'entity'    => 'category',
+            'model'     => "App\Models\Category",
+            'attribute' => 'name',
+            'options'   => (function ($query) {
+                 return $query->where('parent_id',null)->get();
+             }),
+         ]);
+
         CRUD::field('title');
         CRUD::field('url');
         CRUD::field('description');
