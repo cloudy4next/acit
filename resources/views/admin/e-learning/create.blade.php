@@ -39,6 +39,25 @@
                                 <span class="text-danger"><strong>{{ $errors->first('title') }}</strong></span>
                             @endif
                         </div>
+                        <div class="form-group col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                            <label for="e_category">E-Category </label> <span class="text-danger">*</span>
+                            {!! Form::select(
+                                'e_category',
+                                ['ব্যবস্থাপনা' => 'ব্যবস্থাপনা', 'রোগ' => 'রোগ'],
+                                'ব্যবস্থাপনা',
+                                [
+                                    'class' => 'form-control e_category',
+                                    'id' => 'e_category',
+                                    'tabindex' => 2,
+                                    'required' => 'required',
+                                    'data-error' => 'This field is required',
+                                ],
+                            ) !!}
+                            <div class="help-block with-errors text-danger"></div>
+                            @if ($errors->has('e_category'))
+                                <span class="text-danger"><strong>{{ $errors->first('e_category') }}</strong></span>
+                            @endif
+                        </div>
                     </div>
 
                     <div class="row">

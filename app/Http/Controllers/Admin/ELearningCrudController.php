@@ -46,6 +46,7 @@ class ELearningCrudController extends CrudController
 
         CRUD::column('title');
         CRUD::column('category');
+        CRUD::column('e_category');
         CRUD::column('description');
         CRUD::column('created_at');
 
@@ -114,8 +115,8 @@ class ELearningCrudController extends CrudController
         $eleraning->title = $request['title'];
         $eleraning->description = $request['description'];
         $eleraning->category_id = $request['category_id'];
+        $eleraning->e_category = $request['e_category'];
         $eleraning->images = $fileName ?? NULL;
-
         $eleraning->created_at = Carbon::now();
         $eleraning->save();
 
@@ -157,6 +158,7 @@ class ELearningCrudController extends CrudController
         $eleraning = ELearning::find($id);
         $eleraning->title = $request['title'];
         $eleraning->description = $request['description'];
+        $eleraning->category_id = $request['category_id'];
         $eleraning->e_category = $request['e_category'];
         $eleraning->images = $fileName ?? NULL;
         $eleraning->created_at = Carbon::now();

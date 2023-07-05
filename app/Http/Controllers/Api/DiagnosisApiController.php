@@ -275,11 +275,23 @@ class DiagnosisApiController extends Controller
 
     public function elearningSingleCat(Request $request)
     {
-        $childParent = Category::where('category_id', $request->id)
-        ->where('parent_id', $request->id)->get()->toArray();
+        $data = ELearning::whereIn('category_id',  $request->id)->get();
+        $e_data = [];
 
-        $data = ELearning::whereIn('category_id', $childParent)->get();
+        if ($data->count() == 0) {
+            return response(['error' => 'Noting Found!'], 404);
+        }
 
+        foreach ($data as $e_cat) {
+            $e_data[] = $this->elearningResponse($e_cat);
+        }
+
+        return response(['message' => 'success', 'count' => $data->count(), 'data' => $e_data], 200);
+    }
+    public function elearningSingleSub(Request $request)
+    {
+        $data = ELearning::where('category_id', $request->id)
+            ->where('e_category', $request->subCat)->get();
         $e_data = [];
 
         if ($data->count() == 0) {
@@ -293,11 +305,12 @@ class DiagnosisApiController extends Controller
         return response(['message' => 'success', 'count' => $data->count(), 'data' => $e_data], 200);
     }
 
-    public function elearningSingle(Request $request)
+    public function elearningSingleSubSearch(Request $request)
     {
         $searchTeam = $request->q;
 
-        $data = ELearning::where('category_id', $request->category)
+        $data = ELearning::where('category_id', $request->id)
+            ->where('e_category', $request->subCat)
             ->where('title', 'LIKE', '%' . $searchTeam . '%')
             ->orwhere('description', 'LIKE', '%' . $searchTeam . '%')->get();
         $e_data = [];

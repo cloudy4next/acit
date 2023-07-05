@@ -17,6 +17,7 @@ class CreateELearningsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('category_id')->nullable();
             $table->string('title');
+            $table->string('e_category');
             $table->longText('description');
             $table->string('images');
             $table->foreign('category_id')->references('id')->on('categories');

@@ -39,21 +39,10 @@ class CategoryCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        $data = $this->getParent();
-
         $this->crud->denyAccess(['update', 'store', 'show', 'delete']);
-        // CRUD::column('id');
         CRUD::column('name');
-        $this->crud->addColumn([
-            'name' => 'parent_id',
-            'label' => 'Parent',
-            'type' => 'closure',
-            'function' => function ($entry) use ($data) {
-                return $data[$entry->parent_id] ?? '--';
-            }
-        ]);
+
         CRUD::column('created_at');
-        // CRUD::column('updated_at');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -71,17 +60,7 @@ class CategoryCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(CategoryRequest::class);
-        $data = $this->getParent();
-
         CRUD::field('name');
-        $this->crud->addField([
-            'label' => "Parent",
-            'name' => 'parent_id',
-            'type' => 'select',
-            'entity' => 'children',
-            'attribute' => 'name',
-            ]);
-
         /**
          * Fields can be defined using the fluent syntax or array syntax:
          * - CRUD::field('price')->type('number');
@@ -100,14 +79,4 @@ class CategoryCrudController extends CrudController
         $this->setupCreateOperation();
     }
 
-    private function getParent(): array
-    {
-        $results = Category::select('id', 'name')->get()->toArray();
-        $data = [];
-        foreach ($results as $result) {
-            $data[$result['id']] = $result['name'];
-            }
-
-        return $data;
-    }
 }
