@@ -121,8 +121,10 @@ class DiagnosisApiController extends Controller
         }
 
         foreach ($data as $diagnosis_data) {
-            foreach (json_decode($diagnosis_data->image) as $img) {
-                $imageArr[] = 'uploads/diagnosis/image/' . $img;
+            if ($diagnosis_data->image != null) {
+                foreach (json_decode($diagnosis_data->image) as $img) {
+                    $imageArr[] = 'uploads/diagnosis/image/' . $img;
+                }
             }
             $diagnosis[] = [
                 'title' => $diagnosis_data->title,

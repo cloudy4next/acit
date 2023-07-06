@@ -61,15 +61,17 @@
                                     echo '<div><i class="las la-times"></i><small style="color:red;>File not found.</small></div>';
                                 }
                             @endphp
-                            {{-- {{ $diagnosis->image }} --}}
-                            <a href="{{ URL::to('/uploads/diagnosis/image/' . $diagnosis->image) }}" download>
-                                <i class="las la-download"></i><b>Download </b></a>
-                            <div class="form-group col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                                <img id="preview-image-before-upload"
-                                    src="{{ url('/uploads/diagnosis/image/' . $diagnosis->image) }}" alt="preview image"
-                                    style="max-height: 120px; border: 5px solid #555">
-                            </div>
 
+                            @for ($i = 0; $i <= count(json_decode($diagnosis->image)) - 1; $i++)
+                                <a href="{{ URL::to('/uploads/diagnosis/image/' . json_decode($diagnosis->image)[$i]) }}"
+                                    download>
+                                    <i class="las la-download"></i><b>Download </b></a>
+                                <div class="form-group col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                    <img id="preview-image-before-upload"
+                                        src="{{ url('/uploads/diagnosis/image/' . json_decode($diagnosis->image)[$i]) }}"
+                                        alt="preview image" style="max-height: 120px; border: 5px solid #555">
+                                </div>
+                            @endfor
                         </div>
                         <div class="form-group col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                             <label class="form-label">Uploaded Video : </label>
