@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
+// Being lazy, i implemented all function's on this Controller !!!
 
 class DiagnosisApiController extends Controller
 {
@@ -68,12 +69,13 @@ class DiagnosisApiController extends Controller
 
     public function storeDiagnosis(Request $request)
     {
+        $images[] = $request->image;
         $validation = Validator::make($request->all(), [
             'title' => 'required|string|min:6',
             'category_id' => 'required|integer',
             'description' => 'required|string|min:6|',
-            'audio' => 'mimes:mp4',
-            'image' => 'image',
+            'video' => 'mimes:mp4',
+            'image[]' => 'image',
             'lat' => 'required|string',
             'long' => 'required|string',
 
@@ -83,12 +85,15 @@ class DiagnosisApiController extends Controller
             return response(['errors' => $validation->errors()->all()], 422);
         }
 
-        if ($request->image != NULL) {
-            $image_filename = $this->attachmentStore($request->image, 'image');
+        if ($request->image != null) {
+            foreach ($images[0] as $img) {
+                $imgName[] = $this->attachmentStore($img, 'image');
+            }
         }
-        if ($request->audio != NULL) {
-            $audio_filename = $this->attachmentStore($request->audio, 'audio');
+        if ($request->video != null) {
+            $audio_filename = $this->attachmentStore($request->video, 'audio');
         }
+        // dd($testArr);
 
         $diagnosis = new Diagnosis();
         $diagnosis->title = $request['title'];
@@ -96,7 +101,7 @@ class DiagnosisApiController extends Controller
         $diagnosis->category_id = $request['category_id'];
         $diagnosis->user_id = Auth::user()->id;
         $diagnosis->created_at = Carbon::now();
-        $diagnosis->image = $image_filename ?? NULL;
+        $diagnosis->image = json_encode($imgName);
         $diagnosis->audio = $audio_filename ?? NULL;
         $diagnosis->lat = $request['lat'];
         $diagnosis->long = $request['long'];
@@ -108,7 +113,7 @@ class DiagnosisApiController extends Controller
 
     public function getDiagnosis(Request $request)
     {
-
+        $imageArr = [];
         $data = Diagnosis::where('user_id', Auth::user()->id)->get();
         $diagnosis = [];
         if ($data->count() == 0) {
@@ -116,26 +121,25 @@ class DiagnosisApiController extends Controller
         }
 
         foreach ($data as $diagnosis_data) {
+            foreach (json_decode($diagnosis_data->image) as $img) {
+                $imageArr[] = 'uploads/diagnosis/image/' . $img;
+            }
             $diagnosis[] = [
                 'title' => $diagnosis_data->title,
                 'description' => $diagnosis_data->description,
-                'image' => url('uploads/diagnosis/image/' . $diagnosis_data->image),
-                'audio' => url('uploads/diagnosis/audio/' . $diagnosis_data->audio),
+                'image' => $imageArr,
+                'video' => url('uploads/diagnosis/audio/' . $diagnosis_data->audio),
                 'response_text' => $diagnosis_data->response_text,
                 'category_id' => $diagnosis_data->category_id,
-
             ];
         }
 
         return response(['message' => 'success', 'count' => $data->count(), 'data' => $diagnosis], 200);
     }
 
-    // Being lazy, i implemented all function's on this Controller !!!
 
     public function getPost($id)
     {
-        // dd($id);
-
         $data = Post::where('category_id', $id)->get();
         $post = [];
 
