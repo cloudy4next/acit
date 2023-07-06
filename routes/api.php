@@ -37,14 +37,12 @@ Route::group(['middleware' => 'cors'], function () {
     Route::get('e-learning/{id}', ['as' => 'api.e-learning.single.cat', 'uses' => 'Api\DiagnosisApiController@elearningSingleCat']);
     Route::get('e-learning/{id}/{subCat}', ['as' => 'api.e-learning.single.sub', 'uses' => 'Api\DiagnosisApiController@elearningSingleSub']);
     Route::get('e-learning/{id}/{subCat}/{q}', ['as' => 'api.e-learning.single.sub.search', 'uses' => 'Api\DiagnosisApiController@elearningSingleSubSearch']);
-
+    Route::get('diagnosis', ['as' => 'api.get.diagnosis', 'uses' => 'Api\DiagnosisApiController@getDiagnosis']);
 });
 
 
 
 Route::group(['middleware' => 'auth:api'], function () {
-
-    Route::get('diagnosis', ['as' => 'api.get.diagnosis', 'uses' => 'Api\DiagnosisApiController@getDiagnosis']);
     Route::post('diagnosis-store', ['as' => 'api.store.diagnosis', 'uses' => 'Api\DiagnosisApiController@storeDiagnosis']);
     Route::get('user', ['as' => 'api.user.info', 'uses' => 'Api\DiagnosisApiController@userInfo']);
 });

@@ -114,7 +114,7 @@ class DiagnosisApiController extends Controller
     public function getDiagnosis(Request $request)
     {
         $imageArr = [];
-        $data = Diagnosis::where('user_id', Auth::user()->id)->get();
+        $data = Diagnosis::get();
         $diagnosis = [];
         if ($data->count() == 0) {
             return response(['error' => 'No Resource Found!'], 404);
