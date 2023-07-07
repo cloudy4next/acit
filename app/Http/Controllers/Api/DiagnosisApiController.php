@@ -373,6 +373,7 @@ class DiagnosisApiController extends Controller
             ->union(
                 DB::table('notices')
                     ->where('title', 'like', '%' . $searchTerm . '%')
+                    ->orwhere('description', 'like', '%' . $searchTerm . '%')
                     ->select([
                         'title',
                         'description',
@@ -383,6 +384,7 @@ class DiagnosisApiController extends Controller
             ->union(
                 DB::table('tutorials')
                     ->where('title', 'like', '%' . $searchTerm . '%')
+                    ->orwhere('description', 'like', '%' . $searchTerm . '%')
                     ->select([
                         'title',
                         'url',
