@@ -113,7 +113,6 @@ class DiagnosisApiController extends Controller
 
     public function getDiagnosis(Request $request)
     {
-        $imageArr = [];
         $data = Diagnosis::get();
         $diagnosis = [];
         if ($data->count() == 0) {
@@ -121,6 +120,7 @@ class DiagnosisApiController extends Controller
         }
 
         foreach ($data as $diagnosis_data) {
+            $imageArr = [];
             if ($diagnosis_data->image != null) {
                 foreach (json_decode($diagnosis_data->image) as $img) {
                     $imageArr[] = 'uploads/diagnosis/image/' . $img;
@@ -139,6 +139,23 @@ class DiagnosisApiController extends Controller
         return response(['message' => 'success', 'count' => $data->count(), 'data' => $diagnosis], 200);
     }
 
+    public function getPostAll()
+    {
+        $data = Post::get();
+        $post = [];
+
+        foreach ($data as $post_data) {
+            $post[] = $this->postResponse($post_data);
+        }
+
+        if ($data->count() == 0) {
+            $response = ['error' => 'No Data Found!'];
+
+            return response($response, 404);
+        }
+
+        return response(['message' => 'success', 'count' => $data->count(), 'data' => $post], 200);
+    }
 
     public function getPost($id)
     {
@@ -188,10 +205,23 @@ class DiagnosisApiController extends Controller
         return response(['message' => 'success', 'count' => $data->count(), 'data' => $market], 200);
     }
 
+    public function getTutorialAll()
+    {
+        $data = Tutorial::get();
+        $tutorial = [];
+
+        if ($data->count() == 0) {
+            return response(['error' => 'No Data Found!'], 404);
+        }
+
+        foreach ($data as $tutorial_data) {
+            $tutorial[] = $this->tutorialResponse($tutorial_data);
+        }
+        return response(['message' => 'success', 'count' => $data->count(), 'data' => $tutorial], 200);
+    }
+
     public function getTutorial($id)
     {
-
-        // dd($id);
         $data = Tutorial::where('category_id', $id)->get();
         $tutorial = [];
 

@@ -28,8 +28,10 @@ Route::group(['middleware' => 'cors'], function () {
     // no need to register from api side only log in
     // Route::post('/register', ['as' => 'api.register', 'uses' => 'Api\ApiAuthController@register']);
 
+    Route::get('get-posts', ['as' => 'api.get.posts.all', 'uses' => 'Api\DiagnosisApiController@getPostAll']);
     Route::get('get-posts/{id}', ['as' => 'api.get.posts', 'uses' => 'Api\DiagnosisApiController@getPost']);
     Route::get('market-info', ['as' => 'api.market.info', 'uses' => 'Api\DiagnosisApiController@getMarketInfo']);
+    Route::get('tutorial', ['as' => 'api.get.tutorial.all', 'uses' => 'Api\DiagnosisApiController@getTutorialAll']);
     Route::get('tutorial/{id}', ['as' => 'api.get.tutorial', 'uses' => 'Api\DiagnosisApiController@getTutorial']);
     Route::get('notice', ['as' => 'api.get.notice', 'uses' => 'Api\DiagnosisApiController@getNotice']);
     Route::get('category', ['as' => 'api.category', 'uses' => 'Api\DiagnosisApiController@getCategory']);
