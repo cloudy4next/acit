@@ -15,7 +15,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-
+use Illuminate\Support\Facades\DB;
 // Being lazy, i implemented all function's on this Controller !!!
 
 class DiagnosisApiController extends Controller
@@ -281,8 +281,6 @@ class DiagnosisApiController extends Controller
         ];
     }
 
-
-
     public function elearning()
     {
         $data = ELearning::all();
@@ -360,5 +358,44 @@ class DiagnosisApiController extends Controller
         }
 
         return response(['message' => 'success', 'count' => $data->count(), 'data' => $e_data], 200);
+    }
+
+    // search
+    public function getSearch(Request $request)
+    {
+        $searchTerm = $request->get('q');
+        $select_array = ['title', 'description', 'image', 'created_at'];
+
+        $results = DB::table('posts')
+            ->where('title', 'like', '%' . $searchTerm . '%')
+            ->select($select_array)
+
+            ->union(
+                DB::table('notices')
+                    ->where('title', 'like', '%' . $searchTerm . '%')
+                    ->select([
+                        'title',
+                        'description',
+                        'notice_period',
+                        'created_at',
+                    ])
+            )
+            ->union(
+                DB::table('tutorials')
+                    ->where('title', 'like', '%' . $searchTerm . '%')
+                    ->select([
+                        'title',
+                        'url',
+                        'description',
+                        'category_id',
+                    ])
+            )
+            ->orderBy('created_at', 'desc')
+            ->get()->toArray();
+        if (empty($results)) {
+            return response()->json(['error' => 'Nothing Found'], 401);
+        }
+
+        return response()->json(['success' => $results], 200);
     }
 }
