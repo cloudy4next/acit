@@ -40,7 +40,7 @@ Route::group(['middleware' => 'cors'], function () {
     Route::get('e-learning/{id}/{subCat}', ['as' => 'api.e-learning.single.sub', 'uses' => 'Api\DiagnosisApiController@elearningSingleSub']);
     Route::get('e-learning/{id}/{subCat}/{q}', ['as' => 'api.e-learning.single.sub.search', 'uses' => 'Api\DiagnosisApiController@elearningSingleSubSearch']);
     Route::get('diagnosis', ['as' => 'api.get.diagnosis', 'uses' => 'Api\DiagnosisApiController@getDiagnosis']);
-    Route::get('search/{q}', ['as' => 'api.search', 'uses' => 'Api\DiagnosisApiController@getSearch']);
+    Route::get('search', ['as' => 'api.search', 'uses' => 'Api\DiagnosisApiController@getSearch']);
 });
 
 

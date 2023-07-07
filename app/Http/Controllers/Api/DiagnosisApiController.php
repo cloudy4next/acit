@@ -364,12 +364,12 @@ class DiagnosisApiController extends Controller
     public function getSearch(Request $request)
     {
         $searchTerm = $request->get('q');
+        // dd($searchTerm);
         $select_array = ['title', 'description', 'image', 'created_at'];
 
         $results = DB::table('posts')
             ->where('title', 'like', '%' . $searchTerm . '%')
             ->select($select_array)
-
             ->union(
                 DB::table('notices')
                     ->where('title', 'like', '%' . $searchTerm . '%')
