@@ -369,6 +369,7 @@ class DiagnosisApiController extends Controller
 
         $results = DB::table('posts')
             ->where('title', 'like', '%' . $searchTerm . '%')
+            ->orwhere('description', 'like', '%' . $searchTerm . '%')
             ->select($select_array)
             ->union(
                 DB::table('notices')
@@ -379,17 +380,6 @@ class DiagnosisApiController extends Controller
                         'description',
                         'notice_period',
                         'created_at',
-                    ])
-            )
-            ->union(
-                DB::table('tutorials')
-                    ->where('title', 'like', '%' . $searchTerm . '%')
-                    ->orwhere('description', 'like', '%' . $searchTerm . '%')
-                    ->select([
-                        'title',
-                        'url',
-                        'description',
-                        'category_id',
                     ])
             )
             ->orderBy('created_at', 'desc')
